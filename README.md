@@ -81,6 +81,14 @@ The toolkit stops at a **validated folder + convenience zip**. For Marketplace
 submission use Elgato's supported path — see [docs/publishing.md](docs/publishing.md).
 The enforced spec is documented in [docs/spec.md](docs/spec.md).
 
+## Packs built with it
+
+- **[Stage Keys](packs/stage-keys/)** — 24 full-colour sound-select icons for the
+  live keyboardist (pianos, e-pianos, organs, synths, and the acoustic voices you
+  switch to mid-song). One Stream Deck key per stage-piano voice.
+
+  ![Stage Keys palette](packs/stage-keys/preview.png)
+
 ## Related repos
 
 - [stream-deck](https://github.com/Beennnn/stream-deck) — live-rig config, backups, VPN/BOME scripts

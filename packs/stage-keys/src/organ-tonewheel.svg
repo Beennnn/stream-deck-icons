@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <rect x="20" y="34" width="104" height="60" rx="6" fill="#5a3a22"/>
+  <rect x="20" y="34" width="104" height="60" rx="6" fill="none"/>
+  <rect x="26" y="40" width="92" height="40" rx="3" fill="#2c1c10"/>
+  <!-- Hammond drawbars: white, black, brown at varied lengths -->
+  <g>
+    <rect x="32" y="46" width="7" height="30" rx="3" fill="#efe9dc"/>
+    <rect x="42" y="46" width="7" height="22" rx="3" fill="#1e1e1e"/>
+    <rect x="52" y="46" width="7" height="34" rx="3" fill="#efe9dc"/>
+    <rect x="62" y="46" width="7" height="18" rx="3" fill="#8a3b2a"/>
+    <rect x="72" y="46" width="7" height="28" rx="3" fill="#1e1e1e"/>
+    <rect x="82" y="46" width="7" height="24" rx="3" fill="#8a3b2a"/>
+    <rect x="92" y="46" width="7" height="32" rx="3" fill="#efe9dc"/>
+    <rect x="102" y="46" width="7" height="20" rx="3" fill="#1e1e1e"/>
+  </g>
+  <rect x="24" y="94" width="96" height="14" rx="2" fill="#141414"/>
+  <g fill="#e8e4d8"><rect x="30" y="94" width="4" height="9"/><rect x="40" y="94" width="4" height="9"/><rect x="54" y="94" width="4" height="9"/><rect x="64" y="94" width="4" height="9"/><rect x="78" y="94" width="4" height="9"/><rect x="92" y="94" width="4" height="9"/><rect x="106" y="94" width="4" height="9"/></g>
+</svg>

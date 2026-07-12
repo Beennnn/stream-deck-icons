@@ -1,0 +1,9 @@
+{
+    "Name": "Stage Keys",
+    "Author": "Beennnn",
+    "Version": "0.1.0",
+    "Description": "Full-colour sound-select icons for the live keyboardist — one Stream Deck key per stage-piano voice (pianos, e-pianos, organs, synths, and the acoustic voices you switch to mid-song). Recognise the sound at a glance under stage lighting, no menu-diving.",
+    "Icon": "icon.svg",
+    "URL": "https://github.com/Beennnn/stream-deck-icons",
+    "Licence": "license.txt"
+}

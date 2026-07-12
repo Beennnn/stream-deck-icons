@@ -1,8 +1,0 @@
-{
-    "piano-grand":     { "name": "Grand Piano",     "tags": ["keys", "piano", "acoustic"] },
-    "guitar-electric": { "name": "Electric Guitar", "tags": ["strings", "guitar", "electric"] },
-    "saxophone":       { "name": "Saxophone",       "tags": ["woodwind", "sax", "brass", "jazz"] },
-    "drum-kit":        { "name": "Drum Kit",        "tags": ["percussion", "drums"] },
-    "trumpet":         { "name": "Trumpet",         "tags": ["brass", "trumpet", "jazz"] },
-    "violin":          { "name": "Violin",          "tags": ["strings", "violin", "orchestra"] }
-}

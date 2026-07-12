@@ -1,9 +1,0 @@
-{
-    "Name": "Instruments",
-    "Author": "Beennnn",
-    "Version": "0.1.0",
-    "Description": "Full-colour musical instrument icons for Stream Deck — a wide range across keys, strings, brass, woodwind and percussion.",
-    "Icon": "icon.svg",
-    "URL": "https://github.com/Beennnn/stream-deck-icons",
-    "Licence": "license.txt"
-}

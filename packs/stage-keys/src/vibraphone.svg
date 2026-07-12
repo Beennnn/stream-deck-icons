@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- gold bars, back row shorter -->
+  <g fill="#c9a24a"><rect x="24" y="44" width="12" height="24" rx="2"/><rect x="40" y="44" width="12" height="24" rx="2"/><rect x="56" y="44" width="12" height="24" rx="2"/><rect x="72" y="44" width="12" height="24" rx="2"/><rect x="88" y="44" width="12" height="24" rx="2"/><rect x="104" y="44" width="12" height="24" rx="2"/></g>
+  <g fill="#e0c266"><rect x="22" y="74" width="15" height="30" rx="2"/><rect x="41" y="74" width="15" height="30" rx="2"/><rect x="60" y="74" width="15" height="30" rx="2"/><rect x="79" y="74" width="15" height="30" rx="2"/><rect x="98" y="74" width="15" height="30" rx="2"/></g>
+  <rect x="18" y="104" width="108" height="6" rx="3" fill="#6b6b70"/>
+  <!-- resonator tubes -->
+  <g fill="#8a8a90"><rect x="26" y="110" width="4" height="14"/><rect x="52" y="110" width="4" height="16"/><rect x="80" y="110" width="4" height="14"/><rect x="106" y="110" width="4" height="12"/></g>
+  <!-- mallets -->
+  <g><line x1="66" y1="88" x2="120" y2="40" stroke="#7a5a2a" stroke-width="3" stroke-linecap="round"/><circle cx="66" cy="88" r="6" fill="#c0392b"/><line x1="80" y1="90" x2="128" y2="52" stroke="#7a5a2a" stroke-width="3" stroke-linecap="round"/><circle cx="80" cy="90" r="6" fill="#2b6cb0"/></g>
+</svg>
