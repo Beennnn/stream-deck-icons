@@ -83,8 +83,11 @@ values survive every `meta`/`build` re-run:
 `.streamDeckIconPack` zip wrapping a `<id>.sdIconPack/` folder), so the output
 is **submit-ready**: double-click to install, or upload to the Maker Console —
 no Icon Pack Man web tool required. If you *do* use Icon Pack Man, it mangles
-icon names/tags on import; `sdicons repair` fixes the export. The full,
-hard-won process (container format, Icon Pack Man quirks, Maker Console) is in
+icon names/tags on import; `sdicons repair` fixes the export.
+
+**Start here: [docs/procedure.md](docs/procedure.md)** — the complete
+end-to-end runbook (zero → published pack). The hard-won detail (container
+format, Icon Pack Man quirks, Maker Console wizard) is in
 [docs/publishing.md](docs/publishing.md); the enforced spec in
 [docs/spec.md](docs/spec.md).
 
