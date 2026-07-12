@@ -1,57 +1,79 @@
-"""Assemble a validated pack into a distributable archive.
+"""Assemble a validated pack into a submit-ready .streamDeckIconPack.
 
-IMPORTANT — honesty about the format: Elgato's *supported* packaging path
-is the Icon Pack Man web tool (https://iconpackman.elgato.com), which
-emits the official `.streamDeckIconPack`. That extension is (as of
-2026-07) a zip archive of the pack folder, so this function builds the
-same zip as a convenience for local install/testing — but it is
-best-effort and NOT a substitute for Maker Console submission. The CLI
-prints this caveat every time. See docs/publishing.md.
+Container format (VERIFIED 2026-07-12 by exporting from Elgato's Icon Pack
+Man and inspecting the bytes):
+
+    <pack-id>.streamDeckIconPack          ← a ZIP file, this is what you ship
+    └── <pack-id>.sdIconPack/             ← REQUIRED top-level wrapper folder
+        ├── manifest.json
+        ├── icons.json
+        ├── icon.svg                      ← the pack thumbnail (manifest.Icon)
+        ├── license.txt
+        ├── icons/  (144×144 png/svg/…)
+        └── previews/  (optional, up to 3 store-preview png/jpg)
+
+`<pack-id>` is a reverse-domain identifier, e.g. `com.beennnn.stagekeys`
+(Stream Deck derives the pack identity from this folder name). Our earlier
+packager wrote files at the ZIP ROOT with no wrapper folder — that is NOT
+the shape Icon Pack Man produces and likely won't install. This builds the
+exact same container Icon Pack Man does, so Icon Pack Man is now OPTIONAL:
+the output is ready to double-click-install AND to submit to Maker Console.
 
 Packaging refuses to run if `validate` reports any error.
+See docs/publishing.md for the full publishing process + Icon Pack Man quirks.
 """
+import json
+import re
 import zipfile
 from pathlib import Path
 
 from . import spec
 from .validate import validate
-from .util import ok, warn, err
+from .util import ok, warn, err, slug
 
-# Files/dirs that belong in the shipped pack (everything else is dev cruft).
+# Files that belong in the shipped pack (everything else is dev cruft).
 _INCLUDE = {spec.FILE_MANIFEST, spec.FILE_ICONS_JSON, spec.FILE_LICENSE}
-_INCLUDE_PREFIX = (spec.DIR_ICONS + "/",)
+_INCLUDE_PREFIX = (spec.DIR_ICONS + "/", spec.DIR_PREVIEWS + "/")
 
 
-def package(pack_dir, out_dir="dist", as_iconpack=True):
+def derive_pack_id(manifest):
+    """Reverse-domain id from manifest: com.<author>.<name> (lowercase alnum)."""
+    if manifest.get("Id"):
+        return manifest["Id"]
+    def part(s):
+        return re.sub(r"[^a-z0-9]", "", (s or "").lower()) or "pack"
+    return f"com.{part(manifest.get('Author'))}.{part(manifest.get('Name'))}"
+
+
+def package(pack_dir, out_dir="dist", pack_id=None):
     pack = Path(pack_dir)
     errors, _ = validate(pack)
     if errors:
         raise SystemExit(err(f"refusing to package: {len(errors)} validation "
                              f"error(s). Run `sdicons validate {pack}` first."))
 
-    import json
     manifest = json.loads((pack / spec.FILE_MANIFEST).read_text())
-    from .util import slug
-    stem = f"{slug(manifest['Name'])}-{manifest['Version']}"
+    pid = pack_id or derive_pack_id(manifest)
+    wrapper = f"{pid}{spec.SDICONPACK_SUFFIX}"      # <id>.sdIconPack
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    ext = spec.PACK_EXT if as_iconpack else ".zip"
-    archive = out / f"{stem}{ext}"
+    archive = out / f"{pid}{spec.PACK_EXT}"          # <id>.streamDeckIconPack
+
+    icon_rel = manifest.get("Icon")
+    wanted = set(_INCLUDE)
+    if icon_rel:
+        wanted.add(icon_rel)
 
     with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as z:
-        # Always include the pack thumbnail referenced by manifest Icon.
-        icon_rel = manifest.get("Icon")
-        wanted = set(_INCLUDE)
-        if icon_rel:
-            wanted.add(icon_rel)
         for f in sorted(pack.rglob("*")):
             if f.is_dir() or f.name.startswith("."):
                 continue
             rel = f.relative_to(pack).as_posix()
             if rel in wanted or rel.startswith(_INCLUDE_PREFIX):
-                z.write(f, rel)
+                # Everything nests under the required <id>.sdIconPack/ wrapper.
+                z.write(f, f"{wrapper}/{rel}")
 
     print(ok(f"built {archive}"))
-    print(warn("  note: Icon Pack Man (iconpackman.elgato.com) is the "
-               "supported packager for Marketplace — see docs/publishing.md"))
+    print(ok(f"  id: {pid} — submit-ready (double-click to install, "
+             f"or upload to Maker Console)"))
     return archive

@@ -6,8 +6,9 @@ Subcommands (each maps to one cohesive module):
   meta      (re)generate icons.json from icons/ + optional tags.json sidecar
   validate  lint the pack against the Elgato spec
   contact   build a contact-sheet PNG of the whole palette
-  package   zip a validated pack into a .streamDeckIconPack
+  package   zip a validated pack into a submit-ready .streamDeckIconPack
   build     render + meta + validate + contact + package, end to end
+  repair    fix an Icon Pack Man export (inject names/tags from tags.json)
 """
 import argparse
 import sys
@@ -39,15 +40,24 @@ def main(argv=None):
     sp = sub.add_parser("contact", help="build a contact-sheet PNG")
     sp.add_argument("pack"); sp.add_argument("--out")
 
-    sp = sub.add_parser("package", help="build a .streamDeckIconPack")
+    sp = sub.add_parser("package", help="build a submit-ready .streamDeckIconPack")
     sp.add_argument("pack"); sp.add_argument("--out-dir", default="dist")
-    sp.add_argument("--zip", action="store_true", help="use .zip extension")
+    sp.add_argument("--id", help="reverse-domain pack id (default: com.<author>.<name>)")
 
     sp = sub.add_parser("build", help="render+meta+validate+contact+package")
     sp.add_argument("src"); sp.add_argument("pack")
     sp.add_argument("--keep-svg", action="store_true")
     sp.add_argument("--out-dir", default="dist")
-    sp.add_argument("--name"); sp.add_argument("--author")
+    sp.add_argument("--name"); sp.add_argument("--author"); sp.add_argument("--id")
+
+    sp = sub.add_parser("repair",
+                        help="fix an Icon Pack Man export's icons.json names/tags")
+    sp.add_argument("export", help="the exported .streamDeckIconPack (or .zip)")
+    sp.add_argument("--tags", required=True,
+                    help="tags.json mapping slug -> {name, tags}")
+    sp.add_argument("--license", help="overwrite manifest License (e.g. CC-BY-4.0)")
+    sp.add_argument("--url", help="overwrite manifest URL")
+    sp.add_argument("--out", help="output path (default: overwrite input)")
 
     args = p.parse_args(argv)
 
@@ -76,7 +86,12 @@ def main(argv=None):
 
     elif args.cmd == "package":
         from .package import package
-        package(args.pack, args.out_dir, as_iconpack=not args.zip)
+        package(args.pack, args.out_dir, args.id)
+
+    elif args.cmd == "repair":
+        from .repair import repair_export
+        repair_export(args.export, args.tags,
+                      license=args.license, url=args.url, out=args.out)
 
     elif args.cmd == "build":
         from .scaffold import ensure_skeleton
@@ -94,7 +109,7 @@ def main(argv=None):
         print_report(args.pack, errors, warnings)
         if errors:
             sys.exit(1)
-        print("→ package");  package(args.pack, args.out_dir)
+        print("→ package");  package(args.pack, args.out_dir, args.id)
 
 
 if __name__ == "__main__":

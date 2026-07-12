@@ -41,12 +41,29 @@ WEBP animated), filenames ≤80 chars, `manifest.json` needs Name/Author/
 Version(`x.y.z`)/Icon, `icons.json` is an array of `{path,name,tags}`. If you
 change any constraint, update `spec.py` and mirror it in `docs/spec.md`.
 
-## Packaging honesty
+## Packaging & publishing — VERIFIED knowledge (2026-07-12)
 
-`.streamDeckIconPack` is a zip; the toolkit builds one for local install/
-testing. Elgato's **Icon Pack Man** (web) is the supported packager for
-Marketplace submission — do NOT claim the direct zip is the official path.
-`package.py` prints this caveat; keep it. See `docs/publishing.md`.
+Learned by building, exporting through Icon Pack Man, inspecting the bytes,
+and submitting. All encoded in `docs/publishing.md` + `sdicons` itself:
+
+- **Container**: the shippable `.streamDeckIconPack` is a ZIP whose single
+  top-level entry is a wrapper folder `<id>.sdIconPack/` holding
+  manifest.json, icons.json, icon.svg, license.txt, icons/, previews/.
+  `<id>` is reverse-domain (`com.beennnn.stagekeys`) — Stream Deck reads the
+  pack identity from that folder name. Our OLD packager put files at the zip
+  root (no wrapper) — wrong. `package.py` now writes the wrapper; it's
+  **submit-ready**, Icon Pack Man is optional.
+- **Icon Pack Man quirks**: the web tool IGNORES `name`/`tags` from a
+  dragged-in icons.json (names become "trombone.png", tags empty, "Mapping
+  file loaded" shows red ✗); it stamps `License: MIT`; it DOES read
+  manifest.json + previews/. Its loose-file drag can't be automated (native
+  Finder→page), so that step is manual. `sdicons repair <export> --tags
+  tags.json` re-injects names/tags + fixes License/URL, preserving the
+  container.
+- **Maker Console** submission needs the user's Elgato login — never enter
+  their credentials; drive the form with them, they click Submit.
+- Do NOT claim things about the format you haven't verified against a real
+  export. If Elgato changes it, re-verify and update `spec.py` + `publishing.md`.
 
 ## Conventions
 

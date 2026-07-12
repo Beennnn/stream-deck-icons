@@ -74,6 +74,21 @@ Array of objects, one per icon:
 
 ## Packaging & publishing
 
-The official packager is **Icon Pack Man** (web tool) → `.streamDeckIconPack`.
-Double-clicking that file installs the pack; distribution to others goes
-through the **Maker Console** after review. See [publishing.md](publishing.md).
+The shippable file is a **ZIP** named `<id>.streamDeckIconPack` containing a
+single wrapper folder `<id>.sdIconPack/` (verified 2026-07-12):
+
+```
+com.you.mypack.streamDeckIconPack   (zip)
+└── com.you.mypack.sdIconPack/       (Stream Deck reads the id from this name)
+    ├── manifest.json
+    ├── icons.json
+    ├── icon.svg
+    ├── license.txt
+    ├── icons/
+    └── previews/   (optional, ≤3 store previews)
+```
+
+`<id>` is reverse-domain (`com.you.mypack`). `sdicons package` emits exactly
+this, so it's submit-ready without the Icon Pack Man web tool. Double-clicking
+the file installs the pack; distribution goes through the **Maker Console**
+after review. Full process + Icon Pack Man quirks: [publishing.md](publishing.md).

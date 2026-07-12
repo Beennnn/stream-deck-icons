@@ -72,14 +72,20 @@ values survive every `meta`/`build` re-run:
 | `meta`     | (re)generate `icons.json` from `icons/` + `tags.json` |
 | `validate` | lint the pack against the Elgato spec (exit 1 on error) |
 | `contact`  | build a contact-sheet PNG of the whole palette |
-| `package`  | zip a validated pack into a `.streamDeckIconPack` |
+| `package`  | build a **submit-ready** `.streamDeckIconPack` (correct `<id>.sdIconPack/` container) |
 | `build`    | all of the above, end to end |
+| `repair`   | fix an Icon Pack Man export (re-inject names/tags from `tags.json`) |
 
 ## Publishing
 
-The toolkit stops at a **validated folder + convenience zip**. For Marketplace
-submission use Elgato's supported path — see [docs/publishing.md](docs/publishing.md).
-The enforced spec is documented in [docs/spec.md](docs/spec.md).
+`sdicons package` emits the **exact container Elgato expects** (a
+`.streamDeckIconPack` zip wrapping a `<id>.sdIconPack/` folder), so the output
+is **submit-ready**: double-click to install, or upload to the Maker Console —
+no Icon Pack Man web tool required. If you *do* use Icon Pack Man, it mangles
+icon names/tags on import; `sdicons repair` fixes the export. The full,
+hard-won process (container format, Icon Pack Man quirks, Maker Console) is in
+[docs/publishing.md](docs/publishing.md); the enforced spec in
+[docs/spec.md](docs/spec.md).
 
 ## Packs built with it
 

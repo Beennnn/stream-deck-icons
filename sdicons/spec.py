@@ -44,8 +44,11 @@ FILE_MANIFEST = "manifest.json"
 FILE_ICONS_JSON = "icons.json"
 FILE_LICENSE = "license.txt"
 DIR_ICONS = "icons"
+DIR_PREVIEWS = "previews"   # optional store-preview images (png/jpg, up to 3)
 
-# Final distributable extension (produced by Elgato's Icon Pack Man web
-# tool; the toolkit's `package` builds a best-effort zip mirror — see
-# docs/publishing.md for why the web tool remains the supported path).
-PACK_EXT = ".streamDeckIconPack"
+# Container format (verified 2026-07-12 against an Icon Pack Man export):
+# the shippable file is a ZIP named `<id>.streamDeckIconPack` whose single
+# top-level entry is a folder `<id>.sdIconPack/` holding the pack. Stream
+# Deck derives the pack identity from that folder name (reverse-domain id).
+PACK_EXT = ".streamDeckIconPack"   # extension of the shippable zip
+SDICONPACK_SUFFIX = ".sdIconPack"  # suffix of the required wrapper folder
