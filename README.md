@@ -89,11 +89,6 @@ The enforced spec is documented in [docs/spec.md](docs/spec.md).
 
   ![Stage Keys palette](packs/stage-keys/preview.png)
 
-## Related repos
-
-- [stream-deck](https://github.com/Beennnn/stream-deck) — live-rig config, backups, VPN/BOME scripts
-- [stream-deck-profiles](https://github.com/Beennnn/stream-deck-profiles) — the ProfilesV3 profiles
-
 ## License
 
 MIT — see [LICENSE](LICENSE).
