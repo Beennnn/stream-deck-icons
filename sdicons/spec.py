@@ -52,3 +52,10 @@ DIR_PREVIEWS = "previews"   # optional store-preview images (png/jpg, up to 3)
 # Deck derives the pack identity from that folder name (reverse-domain id).
 PACK_EXT = ".streamDeckIconPack"   # extension of the shippable zip
 SDICONPACK_SUFFIX = ".sdIconPack"  # suffix of the required wrapper folder
+
+# Elgato Maker Console (maker.elgato.com — NOT console.elgato.com) is where a
+# pack is submitted for review. Its "Upload media" step wants these exact
+# sizes (verified 2026-07-12 against the live wizard):
+MAKER_URL = "https://maker.elgato.com"
+MAKER_HERO_SIZE = (1920, 960)   # thumbnail + gallery images, 2:1
+MAKER_PREVIEW_SIZE = 144        # the 5 "icon preview" tiles, 1:1

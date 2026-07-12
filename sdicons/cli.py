@@ -9,6 +9,7 @@ Subcommands (each maps to one cohesive module):
   package   zip a validated pack into a submit-ready .streamDeckIconPack
   build     render + meta + validate + contact + package, end to end
   repair    fix an Icon Pack Man export (inject names/tags from tags.json)
+  maker-media  generate Maker Console upload assets (thumbnail/previews/gallery)
 """
 import argparse
 import sys
@@ -59,6 +60,15 @@ def main(argv=None):
     sp.add_argument("--url", help="overwrite manifest URL")
     sp.add_argument("--out", help="output path (default: overwrite input)")
 
+    sp = sub.add_parser("maker-media",
+                        help="generate Maker Console upload assets from a pack")
+    sp.add_argument("pack")
+    sp.add_argument("--out-dir", default="maker-media")
+    sp.add_argument("--title", help="hero title (default: manifest Name)")
+    sp.add_argument("--subtitle", help="hero subtitle line")
+    sp.add_argument("--previews",
+                    help="comma-separated icon slugs for the 5 preview tiles")
+
     args = p.parse_args(argv)
 
     # Lazy imports keep each subcommand's deps out of unrelated invocations.
@@ -92,6 +102,12 @@ def main(argv=None):
         from .repair import repair_export
         repair_export(args.export, args.tags,
                       license=args.license, url=args.url, out=args.out)
+
+    elif args.cmd == "maker-media":
+        from .makermedia import maker_media
+        previews = args.previews.split(",") if args.previews else None
+        maker_media(args.pack, args.out_dir, title=args.title,
+                    subtitle=args.subtitle, previews=previews)
 
     elif args.cmd == "build":
         from .scaffold import ensure_skeleton

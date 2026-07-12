@@ -11,5 +11,6 @@ Packs live in their own repos (e.g. streamdeck-stage-keys). This repo is the
 - ✅ Toolkit (sdicons) end-to-end validated on examples/demo-pack
 - ✅ Split content out: Stage Keys pack → https://github.com/Beennnn/streamdeck-stage-keys
 - ✅ `package` emits the VERIFIED submit-ready container (`<id>.sdIconPack/` wrapper + previews)
-- ✅ Added `sdicons repair` — fixes Icon Pack Man's dropped names/tags + License/URL
-- ✅ Publishing process fully documented in docs/publishing.md (container + Icon Pack Man quirks + Maker Console)
+- ✅ `repair` — fixes Icon Pack Man's dropped names/tags + License/URL
+- ✅ `maker-media` — generates Maker Console upload assets (thumbnail 1920×960, 5 previews 144×144, gallery ≥3 at 1920×960)
+- ✅ docs/publishing.md — full verified process: container + Icon Pack Man quirks + Maker Console submission wizard (maker.elgato.com, AI disclosure, media dims, release notes, auto-publish)

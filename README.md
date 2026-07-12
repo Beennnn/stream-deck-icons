@@ -75,6 +75,7 @@ values survive every `meta`/`build` re-run:
 | `package`  | build a **submit-ready** `.streamDeckIconPack` (correct `<id>.sdIconPack/` container) |
 | `build`    | all of the above, end to end |
 | `repair`   | fix an Icon Pack Man export (re-inject names/tags from `tags.json`) |
+| `maker-media` | generate Maker Console upload assets (thumbnail/previews/gallery at exact dims) |
 
 ## Publishing
 

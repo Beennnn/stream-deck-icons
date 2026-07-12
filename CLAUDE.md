@@ -60,10 +60,21 @@ and submitting. All encoded in `docs/publishing.md` + `sdicons` itself:
   Finder→page), so that step is manual. `sdicons repair <export> --tags
   tags.json` re-injects names/tags + fixes License/URL, preserving the
   container.
-- **Maker Console** submission needs the user's Elgato login — never enter
-  their credentials; drive the form with them, they click Submit.
+- **Maker Console** = **maker.elgato.com** (NOT console.elgato.com — that
+  errors). Needs the user's Elgato login (+ org + Maker Agreement first time —
+  legal, their action). Submission wizard: Details (AI-content disclosure
+  REQUIRED — check it for AI art; Type/Theme/Color multi-selects are flaky;
+  Style=Illustrated; not-animated; Free/Paid locked after submit) → Upload
+  media (thumbnail 1920×960, 5 previews 144×144, gallery ≥3 at 1920×960 —
+  native file drops the human must do) → Submit for review (release notes
+  REQUIRED, auto-publish toggle; Submit is the human's final click). Full
+  walkthrough in `docs/publishing.md`.
+- **`sdicons maker-media <pack>`** generates all those upload assets at the
+  exact dimensions (thumbnail/previews/gallery). Constants in `spec.py`
+  (MAKER_URL, MAKER_HERO_SIZE, MAKER_PREVIEW_SIZE).
 - Do NOT claim things about the format you haven't verified against a real
-  export. If Elgato changes it, re-verify and update `spec.py` + `publishing.md`.
+  export/submission. If Elgato changes it, re-verify and update `spec.py` +
+  `publishing.md`.
 
 ## Conventions
 

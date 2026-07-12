@@ -95,13 +95,55 @@ app: set a key's image → **Icon Library** → open your pack → confirm the i
 have real **names** and that a **tag search** (e.g. "organ", "sax", "808")
 surfaces the right ones.
 
-## Submit via Maker Console
+## Submit via Maker Console — full walkthrough (verified 2026-07-12)
 
-- Maker Console: <https://console.elgato.com/> (requires an Elgato login).
-- Upload the `.streamDeckIconPack`, fill title / description / category /
-  preview images, follow the product & branding guidelines. Published after
-  review.
-- Docs: <https://docs.elgato.com/stream-deck/icons/getting-started/>
+The submission portal is **<https://maker.elgato.com>** (NOT `console.elgato.com`,
+which errors). Requires an Elgato login. First-time makers must also **create an
+organization** and **sign the Maker Agreement** — account/legal steps only the
+human can do.
+
+**Generate the required media first** (exact dimensions matter — the wizard
+rejects wrong sizes):
+
+```sh
+sdicons maker-media MyPack --subtitle "one-line pitch" \
+  --previews slug1,slug2,slug3,slug4,slug5
+# → maker-media/  thumbnail-1920x960.png · preview-1..5.png (144×144) · gallery-*.png (1920×960)
+```
+
+Then in the console, **Products → Create product → Icons**, and walk the wizard:
+
+1. **Details about your product**
+   - **Does the product contain AI generated content?** — a required, honest
+     disclosure. If an AI produced the artwork (even parametric SVG authored by
+     an assistant), **check it**. Elgato allows AI content *with* disclosure;
+     hiding it violates the terms.
+   - **Type / Theme / Color** — multi-select dropdowns (they re-open on outside
+     clicks and re-toggle stray rows — click carefully). No "Music" option:
+     for instrument icons, Type = *Artistic, Creative Tools*; Theme = *Symbol,
+     Technology*; Color = *Multicolor*.
+   - **Style** — *Illustrated* for flat full-colour art (not 2D/Minimal/Pixel).
+   - **Is your product animated?** — leave **unchecked** for static PNG packs.
+   - **Set a price** — Free/Paid; **cannot be changed after submitting**.
+   - **Additional links** — optional; add a "Community" link to your project /
+     the sdicons toolkit if you want it on the listing.
+2. **Upload media**
+   - **Thumbnail**: 1× `thumbnail-1920x960.png` (2:1, ≤5 MB).
+   - **Icon previews**: up to 5× `preview-N.png` (144×144, ≤2 MB).
+   - **Gallery**: **≥3** images `gallery-N.png` (1920×960, ≤10 MB) or mp4.
+   - These are native file drops — must be done by the human (a tool driving
+     the browser can't pick local files).
+3. **Submit for review**
+   - Summary shows Name / Stream Deck ID (reverse-domain, e.g.
+     `com.you.mypack`) / Version.
+   - **Release notes** are **required** (≤1500 chars).
+   - **Automatically publish after being approved** — on = goes live right
+     after review; off = you release manually on a chosen date.
+   - **Submit** is the final publish action — the human clicks it.
+
+Review by Elgato follows; then (if auto-publish) it goes live on Marketplace.
+Product & branding guidelines: <https://docs.elgato.com/guidelines/stream-deck/icons/>.
+General docs: <https://docs.elgato.com/stream-deck/icons/getting-started/>.
 
 ## Pre-submission checklist
 
