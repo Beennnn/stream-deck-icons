@@ -11,14 +11,14 @@ the tooling, not any specific palette — palettes are just inputs. Sibling
 of `stream-deck` (config/backups) and `stream-deck-profiles` in the `music`
 group.
 
-**Flagship pack = `packs/instruments/`**: full-colour flat-vector musical
-instrument icons (a wide range: keys/strings/brass/woodwind/percussion), in
-the spirit of Benoît's funk per-song icons but WITHOUT the colour-coding —
-the instrument itself carries the colour on a transparent/neutral tile. Not
-monochrome silhouettes. Source SVGs live in `packs/instruments/src/`;
-metadata (`manifest.json`, `tags.json`, `icon.svg`, `license.txt`) is
-hand-authored; generated `icons/` + `icons.json` + `contact-sheet.png` are
-gitignored (reproduce with `sdicons build`).
+**This repo is the TOOL only.** Actual icon packs live in their own repos and
+are *built with* this toolkit — e.g.
+[streamdeck-stage-keys](https://github.com/Beennnn/streamdeck-stage-keys)
+(`~/dev/music/streamdeck-stage-keys`, the 83-icon GM/XP keyboardist pack).
+Decided 2026-07-12: keep the generic MIT tool separate from CC-BY content
+packs (own versioning, own Marketplace home, tool stays lean). New packs =
+new sibling repos, not folders here. This repo keeps only its tiny
+`examples/demo-pack` to prove the pipeline.
 
 ## Stack & layout
 

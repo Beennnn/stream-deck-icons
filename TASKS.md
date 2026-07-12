@@ -1,20 +1,13 @@
-# TASKS — stream-deck-icons
+# TASKS — stream-deck-icons (the toolkit)
 
-## Publish Stage Keys (NEXT — palette complete: GM 128 + modern synth categories)
-- ☐ Package via Icon Pack Man (iconpackman.elgato.com) from packs/stage-keys/ → official .streamDeckIconPack
-- ☐ Test install: double-click the pack, confirm it appears in Stream Deck Icon Library
-- ☐ Submit through Maker Console (console.elgato.com) — licence CC-BY-4.0, follow branding guidelines
-- 🤔 Driving Icon Pack Man + Maker Console needs Benoît's Elgato login — do it together via browser, or hand off with the step-by-step
+Packs now live in their own repos (e.g. streamdeck-stage-keys). This repo is
+the `sdicons` tool only.
 
-## Stage Keys — optional polish
-- 🤔 Per-icon polish if wanted: grand piano a touch dark; oboe/clarinet & violin/viola/cello read similar (expected within a family); gunshot vs orchestra-hit are both bursts
-
-## Toolkit
-- 🤔 Verify `.streamDeckIconPack` = plain zip by installing a built pack via double-click
-- ☐ Optional: `pyproject.toml` + `pip install -e .` so `sdicons` is on PATH
-- ☐ Optional: SVG viewBox squareness check in `validate`
+- 🤔 Verify `.streamDeckIconPack` = plain zip by installing a built pack via double-click → confirms the convenience zip installs, or tells us Icon Pack Man is mandatory
+- ☐ Optional: `pyproject.toml` + `pip install -e .` so `sdicons` is on PATH (packs' bin/build.sh already look for it there)
+- ☐ Optional: SVG viewBox squareness check in `validate` (warn on non-square sources → letterboxed at 144×144)
 
 ## Done
 - ✅ Public repo live: https://github.com/Beennnn/stream-deck-icons
-- ✅ Toolkit (sdicons) end-to-end validated
-- ✅ Stage Keys: 83 icons — full GM/XP (128 programs) + 7 modern synth categories (drum kit/machine, sampler, synth, arp, mellotron, vocoder)
+- ✅ Toolkit (sdicons) end-to-end validated on examples/demo-pack
+- ✅ Split content out: Stage Keys pack → https://github.com/Beennnn/streamdeck-stage-keys

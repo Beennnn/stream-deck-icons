@@ -1,9 +1,0 @@
-{
-    "Name": "Stage Keys",
-    "Author": "Beennnn",
-    "Version": "1.0.0",
-    "Description": "Full-colour sound-select icons for the live keyboardist — one Stream Deck key per voice. Complete General MIDI / XP set (128 programs, 16 families) PLUS modern synth categories (synthesizer, drum kit, drum machine, sampler/MPC, arpeggio, mellotron, vocoder). Recognise the sound at a glance under stage lighting, no menu-diving.",
-    "Icon": "icon.svg",
-    "URL": "https://github.com/Beennnn/stream-deck-icons",
-    "Licence": "license.txt"
-}

@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
-  <!-- vessel flute, sweet-potato body -->
-  <path d="M36 78 q0 -26 30 -28 q40 -3 46 16 q4 16 -14 24 q-30 14 -50 4 q-12 -6 -12 -16 z" fill="#3a86c0"/>
-  <path d="M42 74 q2 -18 26 -20 q34 -2 40 12 q3 12 -12 18 q-26 12 -44 3 q-11 -6 -10 -13 z" fill="#57a3db"/>
-  <!-- mouthpiece spout -->
-  <path d="M108 80 q14 2 20 12 q3 5 -3 6 q-12 0 -20 -6 z" fill="#2f6ea0"/>
-  <!-- finger holes -->
-  <g fill="#1f4a6e"><circle cx="58" cy="66" r="3.4"/><circle cx="72" cy="62" r="3.4"/><circle cx="86" cy="64" r="3.4"/><circle cx="64" cy="80" r="3"/><circle cx="80" cy="80" r="3"/></g>
-</svg>

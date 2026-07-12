@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
-  <!-- abstract muzzle flash burst (GM 128 SFX) -->
-  <g fill="#f2c14e"><path d="M72 20 l9 30 -9 -8 -9 8 z"/><path d="M124 72 l-30 9 8 -9 -8 -9 z"/><path d="M72 124 l-9 -30 9 8 9 -8 z"/><path d="M20 72 l30 -9 -8 9 8 9 z"/></g>
-  <g fill="#e0742b"><path d="M104 40 l-16 16 4 -12 -12 -4 z"/><path d="M40 40 l16 16 -4 -12 12 -4 z"/><path d="M104 104 l-16 -16 4 12 -12 4 z"/><path d="M40 104 l16 -16 -4 12 12 4 z"/></g>
-  <circle cx="72" cy="72" r="22" fill="#c0392b"/>
-  <circle cx="72" cy="72" r="12" fill="#f4d06a"/>
-</svg>

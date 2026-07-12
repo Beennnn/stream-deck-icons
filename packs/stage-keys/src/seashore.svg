@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
-  <circle cx="104" cy="42" r="14" fill="#f2c14e"/>
-  <!-- wave curl -->
-  <path d="M18 92 q18 -34 44 -18 q10 6 6 16 q-4 -10 -14 -8 q14 4 12 18 l-48 0 z" fill="#2f7fb0"/>
-  <path d="M22 90 q16 -26 38 -14 q8 5 5 12 q-6 -8 -14 -4 q10 6 8 14 z" fill="#4aa3d0"/>
-  <!-- water base + foam -->
-  <rect x="14" y="98" width="116" height="24" rx="6" fill="#3a86c0"/>
-  <g fill="#dfeef5"><ellipse cx="40" cy="100" rx="12" ry="3"/><ellipse cx="80" cy="102" rx="14" ry="3"/><ellipse cx="112" cy="100" rx="10" ry="3"/></g>
-</svg>

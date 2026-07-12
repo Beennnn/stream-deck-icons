@@ -83,13 +83,10 @@ The enforced spec is documented in [docs/spec.md](docs/spec.md).
 
 ## Packs built with it
 
-- **[Stage Keys](packs/stage-keys/)** — 83 full-colour sound-select icons for the
-  live keyboardist: the complete **General MIDI / XP** set (all 128 programs, 16
-  families) plus modern synth categories (drum machine, sampler, mellotron,
-  vocoder, arpeggio…). One key per voice — see the
-  [GM coverage table](packs/stage-keys/GM-MAP.md).
-
-  ![Stage Keys palette](packs/stage-keys/preview.png)
+- **[Stage Keys](https://github.com/Beennnn/streamdeck-stage-keys)** — 83
+  full-colour sound-select icons for the live keyboardist: the complete
+  General MIDI / XP set (all 128 programs) plus modern synth categories. Lives
+  in its own repo (built with this toolkit).
 
 ## License
 

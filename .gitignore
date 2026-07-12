@@ -3,9 +3,6 @@ dist/
 examples/demo-pack/icons/
 examples/demo-pack/icons.json
 examples/demo-pack/contact-sheet.png
-packs/*/icons/
-packs/*/icons.json
-packs/*/contact-sheet.png
 
 # Python
 __pycache__/
