@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- drum kit — full colour flat -->
+  <!-- cymbals -->
+  <g>
+    <line x1="34" y1="30" x2="34" y2="70" stroke="#8a8a8a" stroke-width="2.5"/>
+    <ellipse cx="34" cy="30" rx="22" ry="5" fill="#e0b64a"/>
+    <ellipse cx="34" cy="29" rx="22" ry="4" fill="#f4d06a"/>
+    <line x1="110" y1="24" x2="110" y2="66" stroke="#8a8a8a" stroke-width="2.5"/>
+    <ellipse cx="110" cy="24" rx="24" ry="5.5" fill="#e0b64a"/>
+    <ellipse cx="110" cy="23" rx="24" ry="4.5" fill="#f4d06a"/>
+  </g>
+  <!-- toms -->
+  <g>
+    <rect x="50" y="52" width="20" height="20" rx="3" fill="#c0392b"/>
+    <ellipse cx="60" cy="52" rx="10" ry="4" fill="#f3ead2"/>
+    <rect x="74" y="52" width="20" height="20" rx="3" fill="#c0392b"/>
+    <ellipse cx="84" cy="52" rx="10" ry="4" fill="#f3ead2"/>
+  </g>
+  <!-- bass drum front -->
+  <circle cx="72" cy="98" r="30" fill="#a02f22"/>
+  <circle cx="72" cy="98" r="24" fill="#f3ead2"/>
+  <circle cx="72" cy="98" r="7" fill="#7d241a"/>
+  <!-- legs -->
+  <line x1="48" y1="118" x2="40" y2="132" stroke="#6b6b6b" stroke-width="3"/>
+  <line x1="96" y1="118" x2="104" y2="132" stroke="#6b6b6b" stroke-width="3"/>
+  <!-- snare -->
+  <rect x="18" y="82" width="26" height="16" rx="2" fill="#2b6cb0"/>
+  <ellipse cx="31" cy="82" rx="13" ry="4" fill="#f3ead2"/>
+</svg>

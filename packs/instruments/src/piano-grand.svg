@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- grand piano, stylised top view — full colour flat -->
+  <path d="M28 118 L28 44 Q28 30 44 30 L104 30 Q120 30 120 52 Q120 92 82 112 Q58 124 44 124 Q28 124 28 118 Z" fill="#1a1a1e"/>
+  <path d="M32 46 Q32 34 46 34 L102 34 Q116 34 116 52 Q116 88 80 107 Q60 118 46 118 Q34 118 34 108 Z" fill="#2b2b32"/>
+  <!-- open lid -->
+  <path d="M104 30 L128 14 L134 20 L120 52 Z" fill="#111114"/>
+  <path d="M104 30 L128 14 L131 17 L112 34 Z" fill="#3a3a44"/>
+  <!-- keyboard -->
+  <rect x="30" y="98" width="52" height="20" rx="3" fill="#f6f6f1" transform="rotate(-24 56 108)"/>
+  <g fill="#15151a" transform="rotate(-24 56 108)">
+    <rect x="35" y="98" width="3" height="12"/><rect x="42" y="98" width="3" height="12"/>
+    <rect x="52" y="98" width="3" height="12"/><rect x="59" y="98" width="3" height="12"/>
+    <rect x="66" y="98" width="3" height="12"/>
+  </g>
+  <!-- legs -->
+  <rect x="40" y="120" width="6" height="12" rx="2" fill="#0d0d10"/>
+</svg>

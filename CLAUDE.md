@@ -11,6 +11,15 @@ the tooling, not any specific palette — palettes are just inputs. Sibling
 of `stream-deck` (config/backups) and `stream-deck-profiles` in the `music`
 group.
 
+**Flagship pack = `packs/instruments/`**: full-colour flat-vector musical
+instrument icons (a wide range: keys/strings/brass/woodwind/percussion), in
+the spirit of Benoît's funk per-song icons but WITHOUT the colour-coding —
+the instrument itself carries the colour on a transparent/neutral tile. Not
+monochrome silhouettes. Source SVGs live in `packs/instruments/src/`;
+metadata (`manifest.json`, `tags.json`, `icon.svg`, `license.txt`) is
+hand-authored; generated `icons/` + `icons.json` + `contact-sheet.png` are
+gitignored (reproduce with `sdicons build`).
+
 ## Stack & layout
 
 - **Python 3.9+** package `sdicons/`, one concern per file:

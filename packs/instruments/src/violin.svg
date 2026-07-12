@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- violin — warm wood, full colour flat -->
+  <g transform="rotate(18 72 72)">
+    <!-- neck + scroll -->
+    <rect x="67" y="16" width="10" height="52" rx="3" fill="#5a3418"/>
+    <rect x="69" y="16" width="6" height="52" fill="#6b3f1d"/>
+    <path d="M72 12 q-9 -2 -9 8 q0 7 8 6 q5 -1 4 -7 z" fill="#4a2a12"/>
+    <g fill="#2e1a0c"><rect x="60" y="28" width="6" height="3" rx="1.5"/><rect x="78" y="28" width="6" height="3" rx="1.5"/><rect x="60" y="36" width="6" height="3" rx="1.5"/><rect x="78" y="36" width="6" height="3" rx="1.5"/></g>
+    <!-- body: violin outline (two bouts) -->
+    <path d="M72 60
+             C 92 60 96 74 92 84
+             C 90 90 92 94 94 100
+             C 98 112 90 128 72 128
+             C 54 128 46 112 50 100
+             C 52 94 54 90 52 84
+             C 48 74 52 60 72 60 Z" fill="#8a4a1e"/>
+    <path d="M72 66
+             C 88 66 90 76 87 84
+             C 85 90 87 95 89 100
+             C 92 110 86 122 72 122
+             C 58 122 52 110 55 100
+             C 57 95 59 90 57 84
+             C 54 76 56 66 72 66 Z" fill="#a55d28"/>
+    <!-- f-holes -->
+    <path d="M63 88 q-3 8 1 16" fill="none" stroke="#3a2010" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M81 88 q3 8 -1 16" fill="none" stroke="#3a2010" stroke-width="2.4" stroke-linecap="round"/>
+    <!-- bridge + tailpiece -->
+    <rect x="64" y="104" width="16" height="3" fill="#e8c98a"/>
+    <path d="M69 110 h6 v12 l-3 4 -3 -4 z" fill="#2e1a0c"/>
+    <!-- strings -->
+    <g stroke="#e8e8e8" stroke-width="0.8"><line x1="69" y1="18" x2="70" y2="122"/><line x1="71" y1="18" x2="71.5" y2="122"/><line x1="73" y1="18" x2="72.5" y2="122"/><line x1="75" y1="18" x2="74" y2="122"/></g>
+  </g>
+</svg>
