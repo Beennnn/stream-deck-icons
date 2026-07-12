@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- rotor -->
+  <rect x="20" y="40" width="104" height="5" rx="2.5" fill="#4a4f57"/>
+  <rect x="70" y="42" width="4" height="10" fill="#4a4f57"/>
+  <!-- body -->
+  <path d="M40 62 q-4 20 22 22 l30 0 q18 0 22 -12 q4 -12 -14 -16 q-30 -6 -60 6 z" fill="#3a6ea5"/>
+  <path d="M48 66 q14 -6 30 -4 q-2 10 -14 12 q-14 0 -16 -8 z" fill="#bfe0ef"/>
+  <!-- tail -->
+  <path d="M92 72 l40 -6 0 8 -38 6 z" fill="#3a6ea5"/>
+  <circle cx="130" cy="66" r="6" fill="none" stroke="#2f588a" stroke-width="3"/>
+  <!-- skids -->
+  <path d="M44 92 l40 0 M50 84 l0 8 M78 84 l0 8" stroke="#2f588a" stroke-width="3" stroke-linecap="round"/>
+</svg>

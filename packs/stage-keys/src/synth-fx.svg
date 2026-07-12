@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <rect x="16" y="46" width="112" height="52" rx="6" fill="#241a36"/>
+  <rect x="24" y="54" width="96" height="36" rx="3" fill="#150e26"/>
+  <!-- aurora / crystal FX screen -->
+  <path d="M28 78 q14 -22 30 -6 q12 12 26 -8 q10 -14 30 4" fill="none" stroke="#b47cf0" stroke-width="3" stroke-linecap="round"/>
+  <path d="M28 84 q16 -12 30 -2 q14 10 28 -6 q10 -10 28 2" fill="none" stroke="#3ee0c8" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+  <!-- sparkles -->
+  <path d="M50 64 l1.5 5 5 1.5 -5 1.5 -1.5 5 -1.5 -5 -5 -1.5 5 -1.5 z" fill="#f2d05a"/>
+  <path d="M96 60 l1.2 4 4 1.2 -4 1.2 -1.2 4 -1.2 -4 -4 -1.2 4 -1.2 z" fill="#f0f0f0"/>
+  <g fill="#443a56"><circle cx="30" cy="52" r="3.5"/><circle cx="114" cy="52" r="3.5"/></g>
+</svg>

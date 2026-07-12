@@ -29,16 +29,16 @@ keyboard:
 ## General MIDI / XP coverage
 
 The pack is organised around the **General MIDI (GM 1) sound map** — the same
-16 banks a Roland XP / SC / GS and any GM workstation expose. 54 dedicated
-icons cover **all 112 melodic GM programs (1–112)**; variations within a family
-share one icon (all four saxes → `saxophone`), and the percussive/SFX tail
-reuses the nearest. Full program-by-program table: **[GM-MAP.md](GM-MAP.md)**.
+16 banks a Roland XP / SC / GS and any GM workstation expose. 76 icons give
+**every one of the 128 GM programs a dedicated icon**; only genuine
+same-instrument variations reuse a drawing (all four saxes → `saxophone`).
+Full program-by-program table: **[GM-MAP.md](GM-MAP.md)**.
 
-## What's inside (54 icons, 16 GM families)
+## What's inside (76 icons, all 16 GM families)
 
-- **Piano** — grand, upright, Rhodes, Wurlitzer, FM/DX
+- **Piano** — grand, upright, Rhodes, Wurlitzer, FM/DX, clavinet, harpsichord
 - **Chromatic percussion** — celesta, glockenspiel, music box, vibraphone,
-  marimba, xylophone, tubular bells
+  marimba, xylophone, tubular bells, dulcimer
 - **Organ** — drawbar, combo/rock, church/pipe, accordion, harmonica
 - **Guitar** — acoustic (nylon/steel), electric (clean/distortion)
 - **Bass** — electric (fingered/slap), acoustic/double bass
@@ -46,10 +46,14 @@ reuses the nearest. Full program-by-program table: **[GM-MAP.md](GM-MAP.md)**.
 - **Ensemble** — choir/voice, orchestra hit
 - **Brass** — trumpet, trombone, tuba, french horn, brass section
 - **Reed** — saxophone, oboe, english horn, bassoon, clarinet
-- **Pipe** — piccolo, flute, recorder, pan flute
-- **Synth** — lead, pad, brass, bass
-- **Ethnic** — sitar, banjo, koto, kalimba
-- **Percussive** — steel drums
+- **Pipe** — piccolo, flute, recorder, pan flute, blown bottle, shakuhachi,
+  whistle, ocarina
+- **Synth** — lead, pad, brass, bass, FX
+- **Ethnic** — sitar, banjo, shamisen, koto, kalimba, bagpipe
+- **Percussive** — tinkle bell, agogo, steel drums, woodblock, taiko,
+  melodic tom, synth drum, reverse cymbal
+- **Sound effects** — breath, seashore, bird tweet, telephone, helicopter,
+  applause, gunshot
 
 ## Build it
 

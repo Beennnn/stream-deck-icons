@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <g transform="rotate(-12 72 72)">
+    <!-- tin whistle -->
+    <rect x="66" y="18" width="12" height="94" rx="6" fill="#4a8f6f"/>
+    <rect x="68" y="18" width="5" height="94" fill="#6fb392"/>
+    <!-- mouthpiece fipple -->
+    <path d="M66 16 q6 -6 12 0 l0 12 -12 0 z" fill="#2f6e4f"/>
+    <rect x="66" y="26" width="12" height="4" fill="#1f4a35"/>
+    <!-- brass ferrule + holes -->
+    <rect x="66" y="34" width="12" height="5" fill="#d8b755"/>
+    <g fill="#1f4a35"><circle cx="72" cy="48" r="2.6"/><circle cx="72" cy="58" r="2.6"/><circle cx="72" cy="68" r="2.6"/><circle cx="72" cy="80" r="2.6"/><circle cx="72" cy="90" r="2.6"/><circle cx="72" cy="100" r="2.6"/></g>
+  </g>
+</svg>

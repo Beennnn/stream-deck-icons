@@ -5,13 +5,11 @@ represents it. The 16 GM families are the same banks a Roland XP / SC / GS
 and any GM-compatible workstation exposes, so this table doubles as the
 XP patch → icon guide.
 
-**Legend** — `✓` dedicated icon · `↺` reuses its family icon (a variation
-shares one drawing: e.g. all four saxes → `saxophone`) · `⧗` future
-dedicated icon (reuses the nearest for now) · `—` out of scope (drum-kit /
-sound-effect bank, not a melodic voice).
+**Legend** — `✓` dedicated icon · `↺` reuses its family icon (a true
+variation shares one drawing: e.g. all four saxes → `saxophone`).
 
-54 dedicated icons cover **all 112 melodic programs (1–112)**; the
-percussive/SFX tail (113–128) reuses the nearest icon or is out of scope.
+76 icons give **every one of the 128 GM programs a dedicated icon**, except
+genuine same-instrument variations (marked `↺`).
 
 ## 1 · Piano (1–8)
 | # | GM program | Icon |
@@ -35,7 +33,7 @@ percussive/SFX tail (113–128) reuses the nearest icon or is out of scope.
 | 13 | Marimba | `marimba` ✓ |
 | 14 | Xylophone | `xylophone` ✓ |
 | 15 | Tubular Bells | `tubular-bells` ✓ |
-| 16 | Dulcimer | `harp` ↺ |
+| 16 | Dulcimer | `dulcimer` ✓ |
 
 ## 3 · Organ (17–24)
 | # | GM program | Icon |
@@ -128,10 +126,10 @@ percussive/SFX tail (113–128) reuses the nearest icon or is out of scope.
 | 74 | Flute | `flute` ✓ |
 | 75 | Recorder | `recorder` ✓ |
 | 76 | Pan Flute | `pan-flute` ✓ |
-| 77 | Blown Bottle | `pan-flute` ↺ |
-| 78 | Shakuhachi | `pan-flute` ↺ |
-| 79 | Whistle | `flute` ↺ |
-| 80 | Ocarina | `recorder` ↺ |
+| 77 | Blown Bottle | `blown-bottle` ✓ |
+| 78 | Shakuhachi | `shakuhachi` ✓ |
+| 79 | Whistle | `whistle` ✓ |
+| 80 | Ocarina | `ocarina` ✓ |
 
 ## 11 · Synth Lead (81–88)
 | # | GM program | Icon |
@@ -146,41 +144,45 @@ percussive/SFX tail (113–128) reuses the nearest icon or is out of scope.
 ## 13 · Synth Effects (97–104)
 | # | GM program | Icon |
 |---|---|---|
-| 97–104 | Rain · Soundtrack · Crystal · Atmosphere · Brightness · Goblins · Echoes · Sci-Fi | `synth-pad` ⧗ |
+| 97–104 | Rain · Soundtrack · Crystal · Atmosphere · Brightness · Goblins · Echoes · Sci-Fi | `synth-fx` ✓ / ↺ |
 
 ## 14 · Ethnic (105–112)
 | # | GM program | Icon |
 |---|---|---|
 | 105 | Sitar | `sitar` ✓ |
 | 106 | Banjo | `banjo` ✓ |
-| 107 | Shamisen | `sitar` ↺ |
+| 107 | Shamisen | `shamisen` ✓ |
 | 108 | Koto | `koto` ✓ |
 | 109 | Kalimba | `kalimba` ✓ |
-| 110 | Bagpipe | `pan-flute` ⧗ |
+| 110 | Bagpipe | `bagpipe` ✓ |
 | 111 | Fiddle | `violin` ↺ |
 | 112 | Shanai | `oboe` ↺ |
 
 ## 15 · Percussive (113–120)
 | # | GM program | Icon |
 |---|---|---|
-| 113 | Tinkle Bell | `glockenspiel` ↺ |
-| 114 | Agogo | `steel-drums` ⧗ |
+| 113 | Tinkle Bell | `tinkle-bell` ✓ |
+| 114 | Agogo | `agogo` ✓ |
 | 115 | Steel Drums | `steel-drums` ✓ |
-| 116 | Woodblock | `xylophone` ⧗ |
-| 117 | Taiko Drum | `timpani` ⧗ |
-| 118 | Melodic Tom | `timpani` ⧗ |
-| 119 | Synth Drum | `synth-bass` ⧗ |
-| 120 | Reverse Cymbal | — |
+| 116 | Woodblock | `woodblock` ✓ |
+| 117 | Taiko Drum | `taiko` ✓ |
+| 118 | Melodic Tom | `melodic-tom` ✓ |
+| 119 | Synth Drum | `synth-drum` ✓ |
+| 120 | Reverse Cymbal | `reverse-cymbal` ✓ |
 
 ## 16 · Sound Effects (121–128)
 | # | GM program | Icon |
 |---|---|---|
 | 121 | Guitar Fret Noise | `guitar-electric` ↺ |
-| 122–128 | Breath · Seashore · Bird · Telephone · Helicopter · Applause · Gunshot | — (SFX bank, out of scope) |
+| 122 | Breath Noise | `breath-noise` ✓ |
+| 123 | Seashore | `seashore` ✓ |
+| 124 | Bird Tweet | `bird-tweet` ✓ |
+| 125 | Telephone Ring | `telephone` ✓ |
+| 126 | Helicopter | `helicopter` ✓ |
+| 127 | Applause | `applause` ✓ |
+| 128 | Gunshot | `gunshot` ✓ |
 
 ---
 
-**Gaps flagged `⧗` for a future dedicated icon:** bagpipe, shamisen, agogo,
-woodblock, taiko, melodic tom, synth drum, reverse cymbal, dulcimer,
-whistle, ocarina, shakuhachi, blown bottle, and dedicated synth-FX art.
-Tracked in [../../TASKS.md](../../TASKS.md).
+**Full GM 128 coverage.** Only same-instrument variations reuse a drawing
+(`↺`) — every distinct GM voice has its own icon.

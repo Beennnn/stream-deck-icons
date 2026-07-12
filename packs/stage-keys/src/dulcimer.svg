@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- hammered dulcimer, trapezoid -->
+  <path d="M20 56 L124 46 L112 98 L32 90 Z" fill="#8a5a2e"/>
+  <path d="M26 58 L118 50 L108 92 L36 86 Z" fill="#a06b38"/>
+  <!-- soundholes -->
+  <circle cx="58" cy="68" r="5" fill="#3a2414"/><circle cx="86" cy="65" r="5" fill="#3a2414"/>
+  <!-- strings -->
+  <g stroke="#efe6c8" stroke-width="0.8"><line x1="30" y1="60" x2="112" y2="53"/><line x1="30" y1="65" x2="112" y2="58"/><line x1="31" y1="72" x2="110" y2="66"/><line x1="32" y1="79" x2="109" y2="74"/><line x1="33" y1="85" x2="108" y2="82"/></g>
+  <!-- bridges -->
+  <path d="M60 50 l3 40" stroke="#5a3418" stroke-width="3"/><path d="M84 48 l3 40" stroke="#5a3418" stroke-width="3"/>
+  <!-- hammers -->
+  <line x1="70" y1="106" x2="54" y2="122" stroke="#7a5a2a" stroke-width="3" stroke-linecap="round"/><rect x="48" y="120" width="10" height="5" rx="2" fill="#c0392b"/>
+  <line x1="84" y1="104" x2="100" y2="122" stroke="#7a5a2a" stroke-width="3" stroke-linecap="round"/><rect x="98" y="120" width="10" height="5" rx="2" fill="#2b6cb0"/>
+</svg>

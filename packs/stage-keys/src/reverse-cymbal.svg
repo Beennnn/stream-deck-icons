@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <line x1="72" y1="60" x2="72" y2="118" stroke="#8a8a90" stroke-width="4"/>
+  <ellipse cx="72" cy="60" rx="46" ry="12" fill="#e0b64a"/>
+  <ellipse cx="72" cy="57" rx="46" ry="11" fill="#f4d06a"/>
+  <circle cx="72" cy="57" r="6" fill="#c99a2e"/>
+  <g fill="none" stroke="#d0d0d0" stroke-width="1.5" opacity="0.8"><ellipse cx="72" cy="57" rx="18" ry="4"/><ellipse cx="72" cy="57" rx="30" ry="7"/></g>
+  <!-- reverse swoosh arrows -->
+  <g fill="none" stroke="#3a86e0" stroke-width="3.5" stroke-linecap="round">
+    <path d="M108 34 q14 6 6 20"/><path d="M36 34 q-14 6 -6 20"/>
+  </g>
+  <path d="M114 54 l-6 0 4 -6 z" fill="#3a86e0"/><path d="M30 54 l6 0 -4 -6 z" fill="#3a86e0"/>
+</svg>
