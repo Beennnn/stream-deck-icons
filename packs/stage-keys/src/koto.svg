@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- long horizontal zither -->
+  <path d="M16 58 q0 -6 8 -6 l100 4 q6 0 6 6 l0 20 q0 6 -6 6 l-100 4 q-8 0 -8 -6 z" fill="#8a5a2e"/>
+  <path d="M20 60 l102 4 0 16 -102 4 z" fill="#a06b38"/>
+  <!-- strings -->
+  <g stroke="#efe6c8" stroke-width="1"><line x1="22" y1="62" x2="122" y2="66"/><line x1="22" y1="66" x2="122" y2="70"/><line x1="22" y1="70" x2="122" y2="74"/><line x1="22" y1="74" x2="122" y2="78"/><line x1="22" y1="78" x2="122" y2="82"/></g>
+  <!-- movable bridges -->
+  <g fill="#efe4cc"><path d="M46 60 l6 0 -3 22 z"/><path d="M72 62 l6 0 -3 22 z"/><path d="M98 64 l6 0 -3 22 z"/></g>
+</svg>

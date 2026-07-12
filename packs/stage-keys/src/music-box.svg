@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <rect x="28" y="60" width="88" height="48" rx="6" fill="#8a5a2e"/>
+  <rect x="28" y="60" width="88" height="12" rx="6" fill="#a06b38"/>
+  <!-- open lid -->
+  <path d="M28 60 L44 40 L132 40 L116 60 Z" fill="#a06b38"/>
+  <path d="M44 40 L132 40 L132 30 L44 30 Z" fill="#6b4322"/>
+  <!-- cylinder + comb inside -->
+  <rect x="40" y="80" width="46" height="16" rx="8" fill="#c9ccd2"/>
+  <g fill="#8a8e94"><circle cx="48" cy="88" r="1.6"/><circle cx="58" cy="84" r="1.6"/><circle cx="68" cy="90" r="1.6"/><circle cx="78" cy="85" r="1.6"/></g>
+  <!-- crank -->
+  <path d="M116 90 h14 v-12" fill="none" stroke="#6b6b70" stroke-width="4" stroke-linecap="round"/><circle cx="130" cy="76" r="4" fill="#c0392b"/>
+  <!-- note -->
+  <path d="M96 44 l0 16" stroke="#f2d05a" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="93" cy="60" r="4" fill="#f2d05a"/>
+</svg>

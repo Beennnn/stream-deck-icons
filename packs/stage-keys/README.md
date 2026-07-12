@@ -26,19 +26,30 @@ keyboard:
 - **See the sound before you press it.** No landing on the wrong program at the
   wrong moment.
 
-## What's inside (40 voices)
+## General MIDI / XP coverage
 
-- **Pianos** — grand, upright, Rhodes, Wurlitzer, FM/DX
-- **Clav & historic keys** — clavinet, harpsichord
-- **Organs** — tonewheel (drawbars), combo (Vox), pipe, accordion
-- **Synths** — lead, pad, brass, bass
-- **Strings** — section, solo violin, double bass, harp
-- **Guitars & bass** — electric guitar, acoustic guitar, electric bass, banjo
-- **Brass** — trumpet, trombone, french horn, tuba
-- **Woodwinds** — saxophone, clarinet, oboe, flute, pan flute, harmonica
-- **Voice** — choir / voice
-- **Mallets & percussion** — vibraphone, glockenspiel, marimba, xylophone,
-  tubular bells, timpani
+The pack is organised around the **General MIDI (GM 1) sound map** — the same
+16 banks a Roland XP / SC / GS and any GM workstation expose. 54 dedicated
+icons cover **all 112 melodic GM programs (1–112)**; variations within a family
+share one icon (all four saxes → `saxophone`), and the percussive/SFX tail
+reuses the nearest. Full program-by-program table: **[GM-MAP.md](GM-MAP.md)**.
+
+## What's inside (54 icons, 16 GM families)
+
+- **Piano** — grand, upright, Rhodes, Wurlitzer, FM/DX
+- **Chromatic percussion** — celesta, glockenspiel, music box, vibraphone,
+  marimba, xylophone, tubular bells
+- **Organ** — drawbar, combo/rock, church/pipe, accordion, harmonica
+- **Guitar** — acoustic (nylon/steel), electric (clean/distortion)
+- **Bass** — electric (fingered/slap), acoustic/double bass
+- **Strings** — violin/fiddle, viola, cello, ensemble, harp, timpani
+- **Ensemble** — choir/voice, orchestra hit
+- **Brass** — trumpet, trombone, tuba, french horn, brass section
+- **Reed** — saxophone, oboe, english horn, bassoon, clarinet
+- **Pipe** — piccolo, flute, recorder, pan flute
+- **Synth** — lead, pad, brass, bass
+- **Ethnic** — sitar, banjo, koto, kalimba
+- **Percussive** — steel drums
 
 ## Build it
 

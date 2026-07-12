@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- impact burst -->
+  <g fill="#f4c542"><path d="M72 20 l7 20 -7 -6 -7 6 z"/><path d="M124 72 l-20 7 6 -7 -6 -7 z"/><path d="M72 124 l-7 -20 7 6 7 -6 z"/><path d="M20 72 l20 -7 -6 7 6 7 z"/></g>
+  <g fill="#e0742b"><path d="M108 36 l-12 18 3 -9 -8 -4 z" transform="rotate(0 72 72)"/><path d="M36 36 l12 18 -3 -9 8 -4 z"/><path d="M108 108 l-12 -18 3 9 -8 4 z"/><path d="M36 108 l12 -18 -3 9 8 4 z"/></g>
+  <circle cx="72" cy="72" r="26" fill="#c0392b"/>
+  <circle cx="72" cy="72" r="17" fill="#f4c542"/>
+  <path d="M66 64 l0 20" stroke="#7d241a" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="63" cy="84" r="4.5" fill="#7d241a"/>
+  <path d="M66 64 l14 -3 0 18" stroke="#7d241a" stroke-width="3.5" fill="none" stroke-linecap="round"/><circle cx="77" cy="79" r="4.5" fill="#7d241a"/>
+</svg>

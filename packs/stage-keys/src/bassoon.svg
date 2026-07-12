@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- long paired wooden body -->
+  <rect x="58" y="34" width="12" height="86" rx="6" fill="#6b3f1d"/>
+  <rect x="60" y="34" width="5" height="86" fill="#8a5228"/>
+  <rect x="74" y="46" width="12" height="74" rx="6" fill="#5a3418"/>
+  <rect x="76" y="46" width="5" height="74" fill="#7a4a22"/>
+  <!-- top connecting cap -->
+  <path d="M58 46 q6 -10 16 0" fill="none" stroke="#5a3418" stroke-width="7"/>
+  <!-- bocal (metal crook) + reed -->
+  <path d="M58 40 q-14 -6 -18 -18" fill="none" stroke="#c9ccd2" stroke-width="4" stroke-linecap="round"/>
+  <path d="M40 22 l-3 -8" stroke="#c8a24a" stroke-width="4" stroke-linecap="round"/>
+  <!-- keys -->
+  <g fill="#d6d8dc" stroke="#8a8c90" stroke-width="0.8"><circle cx="64" cy="52" r="3"/><circle cx="64" cy="66" r="3"/><circle cx="64" cy="80" r="3"/><circle cx="80" cy="64" r="3"/><circle cx="80" cy="80" r="3"/><circle cx="80" cy="96" r="3"/></g>
+</svg>

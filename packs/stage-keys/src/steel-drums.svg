@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- concave steelpan -->
+  <ellipse cx="72" cy="74" rx="52" ry="30" fill="#8a8f96"/>
+  <ellipse cx="72" cy="70" rx="52" ry="30" fill="#b9bec6"/>
+  <ellipse cx="72" cy="68" rx="44" ry="24" fill="#9aa0a8"/>
+  <ellipse cx="72" cy="66" rx="44" ry="24" fill="#cdd2d9"/>
+  <!-- note sections -->
+  <g fill="none" stroke="#6b7078" stroke-width="1.6">
+    <ellipse cx="52" cy="60" rx="10" ry="6"/><ellipse cx="92" cy="60" rx="10" ry="6"/>
+    <ellipse cx="72" cy="54" rx="9" ry="5"/><ellipse cx="48" cy="74" rx="9" ry="5"/><ellipse cx="96" cy="74" rx="9" ry="5"/><ellipse cx="72" cy="78" rx="11" ry="6"/>
+  </g>
+  <!-- sticks -->
+  <line x1="66" y1="60" x2="44" y2="30" stroke="#7a5a2a" stroke-width="3" stroke-linecap="round"/><circle cx="43" cy="28" r="4" fill="#c0392b"/>
+  <line x1="80" y1="60" x2="102" y2="30" stroke="#7a5a2a" stroke-width="3" stroke-linecap="round"/><circle cx="103" cy="28" r="4" fill="#2b6cb0"/>
+</svg>
