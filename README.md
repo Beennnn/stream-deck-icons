@@ -83,9 +83,10 @@ The enforced spec is documented in [docs/spec.md](docs/spec.md).
 
 ## Packs built with it
 
-- **[Stage Keys](packs/stage-keys/)** — 76 full-colour sound-select icons for the
-  live keyboardist, covering the complete **General MIDI / XP** sound set (all 128
-  programs, 16 families). One Stream Deck key per voice — see the
+- **[Stage Keys](packs/stage-keys/)** — 83 full-colour sound-select icons for the
+  live keyboardist: the complete **General MIDI / XP** set (all 128 programs, 16
+  families) plus modern synth categories (drum machine, sampler, mellotron,
+  vocoder, arpeggio…). One key per voice — see the
   [GM coverage table](packs/stage-keys/GM-MAP.md).
 
   ![Stage Keys palette](packs/stage-keys/preview.png)

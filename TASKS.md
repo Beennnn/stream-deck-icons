@@ -1,6 +1,6 @@
 # TASKS — stream-deck-icons
 
-## Publish Stage Keys (NEXT — GM coverage now complete)
+## Publish Stage Keys (NEXT — palette complete: GM 128 + modern synth categories)
 - ☐ Package via Icon Pack Man (iconpackman.elgato.com) from packs/stage-keys/ → official .streamDeckIconPack
 - ☐ Test install: double-click the pack, confirm it appears in Stream Deck Icon Library
 - ☐ Submit through Maker Console (console.elgato.com) — licence CC-BY-4.0, follow branding guidelines
@@ -17,4 +17,4 @@
 ## Done
 - ✅ Public repo live: https://github.com/Beennnn/stream-deck-icons
 - ✅ Toolkit (sdicons) end-to-end validated
-- ✅ Stage Keys: 76 icons — full General MIDI / XP coverage (all 128 programs) + GM-MAP.md
+- ✅ Stage Keys: 83 icons — full GM/XP (128 programs) + 7 modern synth categories (drum kit/machine, sampler, synth, arp, mellotron, vocoder)

@@ -34,7 +34,7 @@ The pack is organised around the **General MIDI (GM 1) sound map** — the same
 same-instrument variations reuse a drawing (all four saxes → `saxophone`).
 Full program-by-program table: **[GM-MAP.md](GM-MAP.md)**.
 
-## What's inside (76 icons, all 16 GM families)
+## What's inside (83 icons — all 16 GM families + modern synth categories)
 
 - **Piano** — grand, upright, Rhodes, Wurlitzer, FM/DX, clavinet, harpsichord
 - **Chromatic percussion** — celesta, glockenspiel, music box, vibraphone,
@@ -54,6 +54,9 @@ Full program-by-program table: **[GM-MAP.md](GM-MAP.md)**.
   melodic tom, synth drum, reverse cymbal
 - **Sound effects** — breath, seashore, bird tweet, telephone, helicopter,
   applause, gunshot
+- **Beyond GM — modern synth categories** — synthesizer, drum kit, drum
+  machine, sampler/MPC, arpeggio/seq, mellotron, vocoder (the category
+  buttons best-selling synths expose that GM has no program for)
 
 ## Build it
 

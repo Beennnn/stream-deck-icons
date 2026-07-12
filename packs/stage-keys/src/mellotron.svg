@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- wooden cabinet -->
+  <rect x="18" y="40" width="108" height="64" rx="6" fill="#6b4322"/>
+  <rect x="18" y="40" width="108" height="12" rx="6" fill="#7d5028"/>
+  <!-- two tape reels (signature) -->
+  <g><circle cx="46" cy="66" r="15" fill="#2a2a2e"/><circle cx="46" cy="66" r="15" fill="none" stroke="#c9ccd2" stroke-width="2"/><circle cx="46" cy="66" r="5" fill="#c9ccd2"/><g stroke="#6a6e78" stroke-width="1.4"><line x1="46" y1="53" x2="46" y2="79"/><line x1="33" y1="66" x2="59" y2="66"/></g></g>
+  <g><circle cx="98" cy="66" r="15" fill="#2a2a2e"/><circle cx="98" cy="66" r="15" fill="none" stroke="#c9ccd2" stroke-width="2"/><circle cx="98" cy="66" r="5" fill="#c9ccd2"/><g stroke="#6a6e78" stroke-width="1.4"><line x1="98" y1="53" x2="98" y2="79"/><line x1="85" y1="66" x2="111" y2="66"/></g></g>
+  <path d="M61 66 q11 6 22 0" fill="none" stroke="#3a3a3a" stroke-width="2"/>
+  <!-- keyboard -->
+  <rect x="24" y="90" width="96" height="14" rx="2" fill="#f2ede0"/>
+  <g fill="#2a1c10"><rect x="30" y="90" width="4" height="9"/><rect x="40" y="90" width="4" height="9"/><rect x="54" y="90" width="4" height="9"/><rect x="64" y="90" width="4" height="9"/><rect x="78" y="90" width="4" height="9"/><rect x="92" y="90" width="4" height="9"/><rect x="106" y="90" width="4" height="9"/></g>
+</svg>

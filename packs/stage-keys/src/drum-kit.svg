@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- cymbals -->
+  <line x1="30" y1="34" x2="30" y2="66" stroke="#8a8a90" stroke-width="2.5"/><ellipse cx="30" cy="34" rx="20" ry="4.5" fill="#e0b64a"/><ellipse cx="30" cy="33" rx="20" ry="3.5" fill="#f4d06a"/>
+  <line x1="112" y1="28" x2="112" y2="62" stroke="#8a8a90" stroke-width="2.5"/><ellipse cx="112" cy="28" rx="22" ry="5" fill="#e0b64a"/><ellipse cx="112" cy="27" rx="22" ry="4" fill="#f4d06a"/>
+  <!-- rack toms -->
+  <rect x="52" y="50" width="19" height="19" rx="3" fill="#c0392b"/><ellipse cx="61.5" cy="50" rx="9.5" ry="3.5" fill="#f3ead2"/>
+  <rect x="73" y="50" width="19" height="19" rx="3" fill="#c0392b"/><ellipse cx="82.5" cy="50" rx="9.5" ry="3.5" fill="#f3ead2"/>
+  <!-- bass drum -->
+  <circle cx="72" cy="98" r="29" fill="#a02f22"/><circle cx="72" cy="98" r="23" fill="#f3ead2"/><circle cx="72" cy="98" r="6.5" fill="#7d241a"/>
+  <line x1="49" y1="116" x2="42" y2="130" stroke="#6b6b6b" stroke-width="3"/><line x1="95" y1="116" x2="102" y2="130" stroke="#6b6b6b" stroke-width="3"/>
+  <!-- snare -->
+  <rect x="18" y="80" width="25" height="15" rx="2" fill="#2b6cb0"/><ellipse cx="30.5" cy="80" rx="12.5" ry="3.5" fill="#f3ead2"/>
+  <!-- hi-hat -->
+  <ellipse cx="112" cy="74" rx="15" ry="3.5" fill="#e0b64a"/><ellipse cx="112" cy="70" rx="15" ry="3.5" fill="#f4d06a"/><line x1="112" y1="74" x2="112" y2="96" stroke="#8a8a90" stroke-width="2.5"/>
+</svg>

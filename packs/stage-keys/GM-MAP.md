@@ -186,3 +186,20 @@ genuine same-instrument variations (marked `↺`).
 
 **Full GM 128 coverage.** Only same-instrument variations reuse a drawing
 (`↺`) — every distinct GM voice has its own icon.
+
+## Beyond GM — modern synth categories (7)
+
+GM's synth entries stop at lead / pad / brass / bass / FX. Real best-selling
+synths and workstations (Yamaha Montage, Korg Kronos, Roland Fantom, Nord
+Stage, Korg microKORG, Roland TR / MPC) expose category buttons GM has no
+program for. These fill that gap:
+
+| Icon | Category — where it comes from |
+|---|---|
+| `synthesizer` | the "Synth / Syn Comp / PolyKey" umbrella — analog synths (Minimoog, Prophet, Juno) |
+| `drum-kit` | acoustic Drum/Perc kit — a category on every workstation |
+| `drum-machine` | Roland TR-808 / 909 electronic rhythm |
+| `sampler` | sample playback / Akai MPC pads (Nord Sample, Montage AWM) |
+| `arpeggio` | the "Seq / Arp / Motion" category (Fantom, Kronos, Montage) |
+| `mellotron` | tape-keyboard strings/choir/flutes (Nord Sample Library staple) |
+| `vocoder` | the microKORG's signature vocal category |

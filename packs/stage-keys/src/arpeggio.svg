@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <rect x="16" y="82" width="112" height="20" rx="2" fill="#ece8df"/>
+  <g fill="#26262c"><rect x="24" y="82" width="4" height="13"/><rect x="34" y="82" width="4" height="13"/><rect x="49" y="82" width="4" height="13"/><rect x="59" y="82" width="4" height="13"/><rect x="69" y="82" width="4" height="13"/><rect x="84" y="82" width="4" height="13"/><rect x="94" y="82" width="4" height="13"/><rect x="109" y="82" width="4" height="13"/><rect x="119" y="82" width="4" height="13"/></g>
+  <!-- ascending step pattern -->
+  <g fill="#3ee0c8"><rect x="24" y="66" width="14" height="8" rx="2"/><rect x="42" y="56" width="14" height="8" rx="2"/><rect x="60" y="46" width="14" height="8" rx="2"/><rect x="78" y="36" width="14" height="8" rx="2"/></g>
+  <g fill="#b47cf0"><rect x="96" y="46" width="14" height="8" rx="2"/><rect x="110" y="56" width="14" height="8" rx="2"/></g>
+  <path d="M100 30 l10 -10 10 10" fill="none" stroke="#f2c14e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><line x1="110" y1="20" x2="110" y2="34" stroke="#f2c14e" stroke-width="3" stroke-linecap="round"/>
+</svg>

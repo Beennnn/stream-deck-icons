@@ -74,5 +74,12 @@
     "telephone":       { "name": "Telephone",        "tags": ["gm", "sfx", "telephone", "ring"] },
     "helicopter":      { "name": "Helicopter",       "tags": ["gm", "sfx", "helicopter"] },
     "applause":        { "name": "Applause",         "tags": ["gm", "sfx", "applause", "crowd"] },
-    "gunshot":         { "name": "Gunshot",          "tags": ["gm", "sfx", "gunshot"] }
+    "gunshot":         { "name": "Gunshot",          "tags": ["gm", "sfx", "gunshot"] },
+    "synthesizer":     { "name": "Synthesizer",      "tags": ["synth", "analog", "minimoog", "prophet", "poly"] },
+    "drum-kit":        { "name": "Drum Kit",         "tags": ["drums", "percussion", "acoustic kit"] },
+    "drum-machine":    { "name": "Drum Machine",     "tags": ["drums", "808", "909", "rhythm", "electronic"] },
+    "sampler":         { "name": "Sampler / MPC",    "tags": ["sampler", "mpc", "pads", "hip-hop"] },
+    "arpeggio":        { "name": "Arpeggio / Seq",   "tags": ["arpeggio", "sequence", "motion", "arp"] },
+    "mellotron":       { "name": "Mellotron",        "tags": ["mellotron", "tape", "strings", "choir", "flutes"] },
+    "vocoder":         { "name": "Vocoder",          "tags": ["vocoder", "vocal", "microkorg", "robot voice"] }
 }
