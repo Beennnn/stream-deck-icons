@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- big upward bell -->
+  <path d="M50 60 q-6 -30 20 -34 q30 -4 40 8 q4 4 -1 7 q-10 6 -26 6 q-18 0 -18 18 z" fill="#f4c542"/>
+  <path d="M56 56 q-3 -22 18 -25 q22 -3 30 5 q-10 5 -24 5 q-16 0 -18 15 z" fill="#e0a91e"/>
+  <!-- body coil -->
+  <path d="M50 60 L52 96 q0 14 16 14 l20 0" fill="none" stroke="#e0a91e" stroke-width="14" stroke-linecap="round"/>
+  <path d="M88 110 q16 0 16 -14 l0 -28" fill="none" stroke="#cfa93a" stroke-width="10" stroke-linecap="round"/>
+  <!-- valves -->
+  <g fill="#f7d774" stroke="#9c6b12" stroke-width="1"><rect x="60" y="72" width="8" height="20" rx="3"/><rect x="70" y="74" width="8" height="20" rx="3"/><rect x="80" y="76" width="8" height="20" rx="3"/></g>
+  <circle cx="104" cy="66" r="4.5" fill="#d0d0d0"/>
+</svg>

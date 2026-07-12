@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <g fill="#c99a4e">
+    <rect x="28" y="30" width="12" height="84" rx="5"/>
+    <rect x="43" y="30" width="12" height="74" rx="5"/>
+    <rect x="58" y="30" width="12" height="64" rx="5"/>
+    <rect x="73" y="30" width="12" height="54" rx="5"/>
+    <rect x="88" y="30" width="12" height="44" rx="5"/>
+    <rect x="103" y="30" width="12" height="34" rx="5"/>
+  </g>
+  <g fill="#e0b768"><rect x="28" y="30" width="4" height="84" rx="2"/><rect x="43" y="30" width="4" height="74" rx="2"/><rect x="58" y="30" width="4" height="64" rx="2"/><rect x="73" y="30" width="4" height="54" rx="2"/><rect x="88" y="30" width="4" height="44" rx="2"/><rect x="103" y="30" width="4" height="34" rx="2"/></g>
+  <g fill="#5a3a1a"><ellipse cx="34" cy="30" rx="6" ry="2.5"/><ellipse cx="49" cy="30" rx="6" ry="2.5"/><ellipse cx="64" cy="30" rx="6" ry="2.5"/><ellipse cx="79" cy="30" rx="6" ry="2.5"/><ellipse cx="94" cy="30" rx="6" ry="2.5"/><ellipse cx="109" cy="30" rx="6" ry="2.5"/></g>
+  <rect x="24" y="52" width="96" height="9" rx="3" fill="#7a4a22"/>
+</svg>

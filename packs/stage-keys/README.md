@@ -26,15 +26,19 @@ keyboard:
 - **See the sound before you press it.** No landing on the wrong program at the
   wrong moment.
 
-## What's inside (24 voices)
+## What's inside (40 voices)
 
 - **Pianos** — grand, upright, Rhodes, Wurlitzer, FM/DX
 - **Clav & historic keys** — clavinet, harpsichord
 - **Organs** — tonewheel (drawbars), combo (Vox), pipe, accordion
 - **Synths** — lead, pad, brass, bass
-- **Acoustic voices you switch to** — strings, solo violin, brass/trumpet,
-  saxophone, flute, choir/voice, vibraphone
-- **Rhythm section** — electric bass, electric guitar
+- **Strings** — section, solo violin, double bass, harp
+- **Guitars & bass** — electric guitar, acoustic guitar, electric bass, banjo
+- **Brass** — trumpet, trombone, french horn, tuba
+- **Woodwinds** — saxophone, clarinet, oboe, flute, pan flute, harmonica
+- **Voice** — choir / voice
+- **Mallets & percussion** — vibraphone, glockenspiel, marimba, xylophone,
+  tubular bells, timpani
 
 ## Build it
 

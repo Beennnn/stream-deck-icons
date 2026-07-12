@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- coiled tubing -->
+  <circle cx="66" cy="72" r="30" fill="none" stroke="#e0a91e" stroke-width="8"/>
+  <circle cx="66" cy="72" r="20" fill="none" stroke="#cfa93a" stroke-width="6"/>
+  <!-- big flared bell lower-right -->
+  <path d="M92 90 q22 6 30 26 q2 5 -3 6 l-30 6 q-6 1 -8 -5 q-4 -14 11 -39 z" fill="#f4c542"/>
+  <path d="M96 98 q16 6 22 20 l-26 5 q-6 -10 4 -25 z" fill="#e0a91e"/>
+  <!-- mouthpipe + rotary valves top-left -->
+  <path d="M46 46 q-10 -6 -18 0" fill="none" stroke="#d0d0d0" stroke-width="5" stroke-linecap="round"/>
+  <g fill="#f7d774" stroke="#9c6b12" stroke-width="1"><circle cx="52" cy="50" r="5"/><circle cx="62" cy="46" r="5"/><circle cx="72" cy="48" r="5"/></g>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- copper kettle -->
+  <path d="M26 64 q0 46 46 46 q46 0 46 -46 z" fill="#b06a2a"/>
+  <path d="M32 66 q0 40 40 40 q40 0 40 -40 z" fill="#c47c34"/>
+  <!-- drumhead top -->
+  <ellipse cx="72" cy="64" rx="46" ry="16" fill="#efe4cc"/>
+  <ellipse cx="72" cy="64" rx="46" ry="16" fill="none" stroke="#8a6a2a" stroke-width="3"/>
+  <ellipse cx="72" cy="64" rx="34" ry="11" fill="#f6efdd"/>
+  <!-- tuning lugs -->
+  <g fill="#8a8a90"><circle cx="30" cy="70" r="3"/><circle cx="50" cy="82" r="3"/><circle cx="72" cy="86" r="3"/><circle cx="94" cy="82" r="3"/><circle cx="114" cy="70" r="3"/></g>
+  <!-- mallets -->
+  <line x1="60" y1="58" x2="30" y2="34" stroke="#7a5a2a" stroke-width="3" stroke-linecap="round"/><circle cx="28" cy="32" r="6" fill="#e8ded0"/>
+  <line x1="84" y1="58" x2="114" y2="34" stroke="#7a5a2a" stroke-width="3" stroke-linecap="round"/><circle cx="116" cy="32" r="6" fill="#e8ded0"/>
+</svg>

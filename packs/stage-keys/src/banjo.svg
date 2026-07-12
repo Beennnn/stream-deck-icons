@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <g transform="rotate(35 72 72)">
+    <rect x="67" y="8" width="10" height="66" fill="#3a2214"/>
+    <rect x="69" y="8" width="6" height="66" fill="#4a2e1a"/>
+    <path d="M64 4 h16 v10 h-16 z" fill="#241309"/>
+    <g fill="#d8d8d8"><circle cx="62" cy="6" r="2.2"/><circle cx="62" cy="12" r="2.2"/><circle cx="82" cy="6" r="2.2"/><circle cx="82" cy="12" r="2.2"/></g>
+    <!-- round drum body -->
+    <circle cx="72" cy="104" r="30" fill="#6b6b72"/>
+    <circle cx="72" cy="104" r="25" fill="#f2efe6"/>
+    <circle cx="72" cy="104" r="30" fill="none" stroke="#8a8a92" stroke-width="3"/>
+    <g fill="#8a8a92"><circle cx="72" cy="76" r="2.4"/><circle cx="96" cy="90" r="2.4"/><circle cx="100" cy="118" r="2.4"/><circle cx="72" cy="132" r="2.4"/><circle cx="44" cy="118" r="2.4"/><circle cx="48" cy="90" r="2.4"/></g>
+    <rect x="66" y="112" width="12" height="4" rx="1.5" fill="#3a2414"/>
+    <g stroke="#cfcfcf" stroke-width="0.7"><line x1="69" y1="10" x2="69" y2="120"/><line x1="72" y1="10" x2="72" y2="120"/><line x1="75" y1="10" x2="75" y2="120"/></g>
+  </g>
+</svg>

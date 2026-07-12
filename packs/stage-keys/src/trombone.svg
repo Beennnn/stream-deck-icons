@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144 144">
+  <!-- horizontal, telescoping slide + bell -->
+  <path d="M26 66 L118 66" fill="none" stroke="#e0a91e" stroke-width="9" stroke-linecap="round"/>
+  <path d="M26 66 L118 66" fill="none" stroke="#f4c542" stroke-width="3" stroke-linecap="round"/>
+  <!-- slide loop going right then back -->
+  <path d="M118 66 q14 0 14 12 q0 12 -14 12 L34 90" fill="none" stroke="#cfa93a" stroke-width="7" stroke-linecap="round"/>
+  <!-- back bend to bell -->
+  <path d="M34 90 q-10 0 -10 -12" fill="none" stroke="#e0a91e" stroke-width="9"/>
+  <!-- bell flaring left -->
+  <path d="M26 66 q-16 -14 -22 -12 q-4 1 -4 5 l0 26 q0 4 4 5 q6 2 22 -12 z" fill="#f4c542" transform="translate(0 -2)"/>
+  <path d="M22 60 q-12 -10 -17 -8 l0 30 q5 2 17 -8 z" fill="#e0a91e"/>
+  <circle cx="120" cy="66" r="4" fill="#d0d0d0"/>
+</svg>
