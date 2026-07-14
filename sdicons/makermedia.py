@@ -160,7 +160,7 @@ def animated_gallery(anim, out, title="", cols=10, fps=8, max_icons=50):
         step = len(paths) / max_icons
         paths = [paths[int(i * step)] for i in range(max_icons)]
 
-    W, H = spec.MAKER_HERO_SIZE            # 1920×960, matches the static banners
+    W, H = spec.MAKER_VIDEO_SIZE           # 1920×1080 — the gallery MP4 slot
     tile, top = 144, (70 if title else 30)
     rows = (len(paths) + cols - 1) // cols
     gap_x = (W - cols * tile) // (cols + 1)

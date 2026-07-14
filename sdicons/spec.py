@@ -57,5 +57,8 @@ SDICONPACK_SUFFIX = ".sdIconPack"  # suffix of the required wrapper folder
 # pack is submitted for review. Its "Upload media" step wants these exact
 # sizes (verified 2026-07-12 against the live wizard):
 MAKER_URL = "https://maker.elgato.com"
-MAKER_HERO_SIZE = (1920, 960)   # thumbnail + gallery images, 2:1
+MAKER_HERO_SIZE = (1920, 960)   # thumbnail + gallery IMAGES, 2:1 (png/jpg)
+MAKER_VIDEO_SIZE = (1920, 1080) # gallery VIDEO, 16:9 (mp4) — verified 2026-07-14
+                                # against the wizard: mp4 must be 1920×1080, not
+                                # 1920×960 (a 960 mp4 is rejected at upload).
 MAKER_PREVIEW_SIZE = 144        # the 5 "icon preview" tiles, 1:1
