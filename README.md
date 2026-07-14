@@ -118,6 +118,9 @@ format, Icon Pack Man quirks, Maker Console wizard) is in
   full-colour sound-select icons for the live keyboardist: the complete
   General MIDI / XP set (all 128 programs) plus modern synth categories. Lives
   in its own repo (built with this toolkit).
+- **[WLED icons](https://github.com/Beennnn/streamdeck-wled-icons)** — the
+  WLED visual set as two packs: **216 animated effect GIFs** (the first pack to
+  exercise the animated pipeline) + **111 static** palette/control icons.
 
 ## License
 
