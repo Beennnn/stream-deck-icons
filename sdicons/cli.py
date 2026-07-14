@@ -10,6 +10,7 @@ Subcommands (each maps to one cohesive module):
   build     render + meta + validate + contact + package, end to end
   repair    fix an Icon Pack Man export (inject names/tags from tags.json)
   maker-media  generate Maker Console upload assets (thumbnail/previews/gallery)
+  animate   assemble a folder of frames into a GIF/WEBP animated icon
 """
 import argparse
 import sys
@@ -77,6 +78,12 @@ def main(argv=None):
     sp.add_argument("--previews",
                     help="comma-separated icon slugs for the 5 preview tiles")
 
+    sp = sub.add_parser("animate",
+                        help="assemble frame images into a GIF/WEBP animated icon")
+    sp.add_argument("frames", help="directory of frame images (sorted by name)")
+    sp.add_argument("--out", required=True, help="output .webp or .gif")
+    sp.add_argument("--fps", type=int, default=15)
+
     args = p.parse_args(argv)
 
     # Lazy imports keep each subcommand's deps out of unrelated invocations.
@@ -117,6 +124,10 @@ def main(argv=None):
         previews = args.previews.split(",") if args.previews else None
         maker_media(args.pack, args.out_dir, title=args.title,
                     subtitle=args.subtitle, previews=previews)
+
+    elif args.cmd == "animate":
+        from .animate import animate_frames_dir
+        animate_frames_dir(args.frames, args.out, fps=args.fps)
 
     elif args.cmd == "build":
         from .scaffold import ensure_skeleton
