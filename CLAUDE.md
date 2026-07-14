@@ -23,7 +23,9 @@ new sibling repos, not folders here. This repo keeps only its tiny
 ## Stack & layout
 
 - **Python 3.9+** package `sdicons/`, one concern per file:
-  `render` (SVG→144px via `rsvg-convert`), `scaffold`, `meta` (icons.json),
+  `render` (SVG→144px via `rsvg-convert`; static rasters resized via Pillow;
+  animated GIF/WEBP resized frame-by-frame — timing/loop/transparency kept),
+  `scaffold`, `meta` (icons.json),
   `validate` (spec linter), `contact` (contact sheet), `package` (zip),
   `cli` (argparse dispatch), `spec.py` (verified Elgato constants — the ONE
   place to update if the spec changes), `util`.
@@ -75,6 +77,26 @@ and submitting. All encoded in `docs/publishing.md` + `sdicons` itself:
 - Do NOT claim things about the format you haven't verified against a real
   export/submission. If Elgato changes it, re-verify and update `spec.py` +
   `publishing.md`.
+
+## Animated icons (added 2026-07-14)
+
+`render` handles animated GIF/WEBP as first-class, not just static rasters:
+- **GIF** → resized in palette (P) mode with NEAREST, per-frame composited via
+  `seek` (disposal resolved). Palette + transparency index copied verbatim, so
+  a ×2 upscale (WLED 72→144) is a lossless pixel double. Pillow merges only
+  truly-identical consecutive frames on save (total loop duration unchanged —
+  verified: ps-hourglass 14→11 frames, 1760 ms both).
+- **WEBP** → RGBA throughout, honours the `--resample` filter.
+- Static PNG/JPEG are now **resized** to 144×144 (were copied verbatim, which
+  left off-size rasters for `validate` to reject).
+- `validate` adds soft fps/duration warnings (`ANIM_FPS_RANGE`,
+  `ANIM_MAX_SECONDS` in spec.py) on top of the existing ~1 MB byte budget.
+- `--resample {nearest,bilinear,bicubic,lanczos}` overrides the per-kind
+  default (lanczos static / nearest animated). GIF stays NEAREST regardless —
+  interpolating palette indices is meaningless.
+
+Built to turn `~/dev/music/wled-assets` effect GIFs into a Marketplace pack —
+see the WLED pack repo (sibling, built with this toolkit).
 
 ## Conventions
 

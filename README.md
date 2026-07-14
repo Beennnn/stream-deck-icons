@@ -12,7 +12,8 @@ into a publishable pack, every time, without hitting a review rejection.
 ## Pipeline
 
 ```
-src/*.svg ──render──▶ MyPack/icons/*.png (144×144)
+src/*.svg ──render──▶ MyPack/icons/*.png (144×144)      static SVG/PNG/JPEG
+src/*.gif ──render──▶ MyPack/icons/*.gif (144×144, ×N frames)  animated
                       MyPack/icons.json   (names + tags)
                       MyPack/manifest.json
                       ├─ validate ▶ Elgato spec lint (blocks packaging on error)
@@ -68,7 +69,7 @@ values survive every `meta`/`build` re-run:
 | Command | Does |
 |---|---|
 | `new`      | scaffold an empty, spec-shaped pack |
-| `render`   | SVG source dir → 144×144 icons in `pack/icons/` |
+| `render`   | source dir → 144×144 icons in `pack/icons/` (SVG/PNG/JPEG static, GIF/WEBP animated frame-by-frame) |
 | `meta`     | (re)generate `icons.json` from `icons/` + `tags.json` |
 | `validate` | lint the pack against the Elgato spec (exit 1 on error) |
 | `contact`  | build a contact-sheet PNG of the whole palette |
@@ -76,6 +77,26 @@ values survive every `meta`/`build` re-run:
 | `build`    | all of the above, end to end |
 | `repair`   | fix an Icon Pack Man export (re-inject names/tags from `tags.json`) |
 | `maker-media` | generate Maker Console upload assets (thumbnail/previews/gallery at exact dims) |
+
+## Animated icons
+
+Elgato icon packs accept animated **GIF** and **WEBP** (Stream Deck plays them
+on the key). `render` treats them as first-class: every frame is resized to
+144×144 with per-frame timing, loop count, and transparency preserved. Small
+LED-matrix effect GIFs (72×72) become a spec-conformant pack without touching
+a single file by hand:
+
+```sh
+bin/sdicons render effects-src/ WledEffects   # 72×72 .gif → 144×144 .gif
+```
+
+Resample filter defaults per source — **lanczos** for smooth static art
+(gradients, illustrations), **nearest** for animation so an integer upscale
+doubles pixels crisply instead of blurring the LED grid. Override with
+`--resample {nearest,bilinear,bicubic,lanczos}`. Animated GIFs stay in palette
+mode (nearest), so a ×2 upscale is a lossless pixel double and identical
+consecutive frames merge without changing the loop. `validate` warns when an
+animation drifts outside Elgato's fps/duration guidance or the ~1 MB budget.
 
 ## Publishing
 

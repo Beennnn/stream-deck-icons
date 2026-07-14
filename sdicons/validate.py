@@ -17,6 +17,33 @@ from .util import ok, warn, err
 RASTER = {".png", ".jpg", ".jpeg", ".gif", ".webp"}
 
 
+def _anim_warnings(name, path):
+    """Soft fps/duration checks for an animated icon (Elgato guidance only)."""
+    out = []
+    try:
+        with Image.open(path) as im:
+            frames = getattr(im, "n_frames", 1)
+            if frames <= 1:
+                return out  # static file in an animated container — fine
+            total_ms = 0
+            for i in range(frames):
+                im.seek(i)
+                total_ms += im.info.get("duration", 0) or 0
+    except Exception:
+        return out
+    if total_ms <= 0:
+        return out
+    secs = total_ms / 1000
+    fps = frames / secs
+    lo, hi = spec.ANIM_FPS_RANGE
+    if fps < lo or fps > hi:
+        out.append(f"icons/{name}: ~{fps:.0f} fps (Elgato suggests {lo}-{hi})")
+    if secs > spec.ANIM_MAX_SECONDS:
+        out.append(f"icons/{name}: {secs:.1f}s loop (Elgato suggests "
+                   f"≤ {spec.ANIM_MAX_SECONDS}s)")
+    return out
+
+
 def validate(pack_dir):
     pack = Path(pack_dir)
     errors, warnings = [], []
@@ -69,9 +96,12 @@ def validate(pack_dir):
                     if (w, h) != (spec.ICON_SIZE, spec.ICON_SIZE):
                         E(f"icons/{f.name}: {w}x{h}, must be "
                           f"{spec.ICON_SIZE}x{spec.ICON_SIZE}")
-                    if ext in {".gif", ".webp"} and f.stat().st_size > spec.ANIM_MAX_BYTES:
-                        W(f"icons/{f.name}: {f.stat().st_size//1024}KB "
-                          f"exceeds ~{spec.ANIM_MAX_BYTES//1024}KB animated budget")
+                    if ext in {".gif", ".webp"}:
+                        if f.stat().st_size > spec.ANIM_MAX_BYTES:
+                            W(f"icons/{f.name}: {f.stat().st_size//1024}KB "
+                              f"exceeds ~{spec.ANIM_MAX_BYTES//1024}KB animated budget")
+                        for m in _anim_warnings(f.name, f):
+                            W(m)
                 except Exception as e:  # unreadable/corrupt raster
                     E(f"icons/{f.name}: cannot read image ({e})")
             on_disk[f.name] = f

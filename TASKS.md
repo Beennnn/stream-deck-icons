@@ -7,6 +7,7 @@ Packs live in their own repos (e.g. streamdeck-stage-keys). This repo is the
 - ☐ Optional: SVG viewBox squareness check in `validate` (warn on non-square sources → letterboxed at 144×144)
 
 ## Done
+- ✅ Animated icons first-class: `render` resizes GIF/WEBP frame-by-frame (timing/loop/transparency kept), static rasters resized too, `--resample` flag, `validate` fps/duration warnings → turns WLED 72×72 effect GIFs into a 144×144 pack
 - ✅ Public repo live: https://github.com/Beennnn/stream-deck-icons
 - ✅ Toolkit (sdicons) end-to-end validated on examples/demo-pack
 - ✅ Split content out: Stage Keys pack → https://github.com/Beennnn/streamdeck-stage-keys

@@ -16,6 +16,10 @@ import sys
 
 from . import __version__
 
+# Kept in sync with render.RESAMPLE — hardcoded here so argparse choices don't
+# force an eager import of render (and Pillow) on every invocation.
+_RESAMPLE_CHOICES = ("nearest", "bilinear", "bicubic", "lanczos")
+
 
 def main(argv=None):
     p = argparse.ArgumentParser(
@@ -31,6 +35,9 @@ def main(argv=None):
     sp.add_argument("src"); sp.add_argument("pack")
     sp.add_argument("--keep-svg", action="store_true",
                     help="keep vector SVGs instead of rasterizing to PNG")
+    sp.add_argument("--resample", choices=list(_RESAMPLE_CHOICES),
+                    help="resize filter override (default: lanczos static, "
+                         "nearest animated — nearest keeps pixel-art crisp)")
 
     sp = sub.add_parser("meta", help="regenerate icons.json")
     sp.add_argument("pack")
@@ -48,6 +55,7 @@ def main(argv=None):
     sp = sub.add_parser("build", help="render+meta+validate+contact+package")
     sp.add_argument("src"); sp.add_argument("pack")
     sp.add_argument("--keep-svg", action="store_true")
+    sp.add_argument("--resample", choices=list(_RESAMPLE_CHOICES))
     sp.add_argument("--out-dir", default="dist")
     sp.add_argument("--name"); sp.add_argument("--author"); sp.add_argument("--id")
 
@@ -78,7 +86,8 @@ def main(argv=None):
 
     elif args.cmd == "render":
         from .render import render_dir
-        render_dir(args.src, args.pack, keep_svg=args.keep_svg)
+        render_dir(args.src, args.pack, keep_svg=args.keep_svg,
+                   resample=args.resample)
 
     elif args.cmd == "meta":
         from .meta import build_icons_json
@@ -117,7 +126,8 @@ def main(argv=None):
         from .contact import contact_sheet
         from .package import package
         print("→ scaffold"); ensure_skeleton(args.pack, args.name, args.author)
-        print("→ render");   render_dir(args.src, args.pack, keep_svg=args.keep_svg)
+        print("→ render");   render_dir(args.src, args.pack, keep_svg=args.keep_svg,
+                                         resample=args.resample)
         print("→ meta");     build_icons_json(args.pack)
         print("→ contact");  contact_sheet(args.pack)
         print("→ validate")
