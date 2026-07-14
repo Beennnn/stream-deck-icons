@@ -191,18 +191,32 @@ def animated_gallery(anim, out, title="", cols=10, fps=8, max_icons=50):
     return webp
 
 
-def _encode_mp4(frames, out, fps):
-    """RGB frames → looping-friendly H.264 MP4 via ffmpeg (None if unavailable)."""
+def _encode_mp4(frames, out, fps, min_seconds=6):
+    """RGB frames → a Maker-Console-compatible H.264 MP4 (None if no ffmpeg).
+
+    The console's uploader transcodes server-side and rejects "too minimal"
+    clips with "Failed to create media". Verified 2026-07-14 that it needs a
+    STANDARD file, not just a valid one: the short 14-frame / 8-fps / silent
+    montage failed until it was (a) looped to a few seconds, (b) re-timed to
+    30 fps, (c) H.264 High profile, and (d) given a silent AAC audio track (a
+    video with no audio stream is rejected). So we loop the frames to
+    `min_seconds`, add anullsrc audio, and encode High/yuv420p/+faststart.
+    """
     if not shutil.which("ffmpeg"):
         print(warn("  ffmpeg not found — skipping .mp4 (webp still written)"))
         return None
+    loops = max(1, -(-int(min_seconds * fps) // len(frames)))  # ceil division
+    seq = frames * loops
     with tempfile.TemporaryDirectory() as tmp:
-        for i, f in enumerate(frames):
+        for i, f in enumerate(seq):
             f.convert("RGB").save(Path(tmp) / f"{i:04d}.png")
         subprocess.run(
-            ["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(fps),
-             "-i", str(Path(tmp) / "%04d.png"),
-             "-c:v", "libx264", "-pix_fmt", "yuv420p",
+            ["ffmpeg", "-y", "-loglevel", "error",
+             "-framerate", str(fps), "-i", str(Path(tmp) / "%04d.png"),
+             "-f", "lavfi", "-i", "anullsrc=channel_layout=stereo:sample_rate=44100",
+             "-c:v", "libx264", "-profile:v", "high", "-level", "4.0",
+             "-pix_fmt", "yuv420p", "-r", "30",
+             "-c:a", "aac", "-b:a", "128k", "-shortest",
              "-vf", "pad=ceil(iw/2)*2:ceil(ih/2)*2", "-movflags", "+faststart",
              str(out)], check=True)
     return out
