@@ -77,6 +77,9 @@ def main(argv=None):
     sp.add_argument("--subtitle", help="hero subtitle line")
     sp.add_argument("--previews",
                     help="comma-separated icon slugs for the 5 preview tiles")
+    sp.add_argument("--animated",
+                    help="dir of animated icons (gif/webp) → also emit an "
+                         "animated gallery mp4/webp for the listing")
 
     sp = sub.add_parser("animate",
                         help="assemble frame images into a GIF/WEBP animated icon")
@@ -123,7 +126,8 @@ def main(argv=None):
         from .makermedia import maker_media
         previews = args.previews.split(",") if args.previews else None
         maker_media(args.pack, args.out_dir, title=args.title,
-                    subtitle=args.subtitle, previews=previews)
+                    subtitle=args.subtitle, previews=previews,
+                    animated=args.animated)
 
     elif args.cmd == "animate":
         from .animate import animate_frames_dir

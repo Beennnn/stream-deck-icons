@@ -130,7 +130,9 @@ Then in the console, **Products → Create product → Icons**, and walk the wiz
 2. **Upload media**
    - **Thumbnail**: 1× `thumbnail-1920x960.png` (2:1, ≤5 MB).
    - **Icon previews**: up to 5× `preview-N.png` (144×144, ≤2 MB).
-   - **Gallery**: **≥3** images `gallery-N.png` (1920×960, ≤10 MB) or mp4.
+   - **Gallery**: **≥3** images `gallery-N.png` (1920×960, ≤10 MB) or **mp4**
+     (≤50 MB) — for an animated pack, upload `gallery-animated.mp4` (from
+     `sdicons maker-media --animated`) here to show the icons in motion.
    - These are native file drops — must be done by the human (a tool driving
      the browser can't pick local files).
 3. **Submit for review**

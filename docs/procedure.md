@@ -113,3 +113,41 @@ sdicons repair ~/Downloads/com.you.mypack.streamDeckIconPack \
 `sdicons package` produces the same container directly, so this is only for
 when the web tool is specifically required. Details:
 [publishing.md](publishing.md#icon-pack-man-quirks-if-you-use-the-web-tool).
+
+## When my icons are (partly) animated
+
+Elgato icon packs may mix static and **animated** icons (GIF/WEBP, 144×144,
+~10-20 fps, ≤5 s, < 1 MB). A natural use: the animated icon is the **active
+state** — on a Stream Deck, wire state 0 = the static icon (idle) and state 1
+= the animated one (playing), driven by a MIDI plugin's state feedback. So a
+pack can ship both a static and an animated variant of a sound.
+
+**Author the motion.** Make the animation read as *how the instrument is
+played*, and clearly visible (not a 2-pixel flicker): a struck drum bounces,
+a held wind sways, plucked strings wobble, a cymbal spins, a synth's waveform
+scrolls. Two ways to produce the files:
+
+- **From a motion function** — `phase(t) -> svg` for `t` in [0,1); render it
+  with the Python API `sdicons.animate.animate_svg(phase, "src/name.webp")`
+  (rsvg renders each phase, assembled into a seamless loop). Good for internal
+  motion (moving parts, scrolling screens, spinning reels).
+- **From frames** — `sdicons animate <frames-dir> --out name.webp --fps 15`
+  assembles a folder of frame images.
+
+**Keep it transparent.** Author with no background rect so the icon composites
+on the button colour. **WEBP is the right container** — it carries full alpha
+(GIF is 1-bit, jagged) and is ~half the size; its frames replace (no ghosting
+trail). Drop the `.webp`/`.gif` into `src/` and `sdicons render` resizes it to
+144×144; `validate` accepts it and checks the fps/duration/size budget.
+
+**Show the motion on the Marketplace.** The Maker Console **gallery accepts
+MP4** — that's where animation belongs (the thumbnail + icon previews stay
+static PNG/JPG). Generate an animated gallery from your animated icons:
+
+```sh
+sdicons maker-media MyPack --subtitle "…" --animated path/to/animated-icons/
+# → also writes maker-media/gallery-animated.mp4 (upload to the gallery) + .webp
+```
+
+Then submit as usual (step 7) — upload the static thumbnail/previews plus the
+`gallery-animated.mp4` into the gallery so the listing shows the icons alive.

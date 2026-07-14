@@ -12,6 +12,9 @@ the whole palette. Output lands in `maker-media/` ready to drag into the
 console. See docs/publishing.md for the full submission walkthrough.
 """
 import json
+import shutil
+import subprocess
+import tempfile
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
@@ -71,7 +74,7 @@ def _grid(img, icons, y0, cols=6, tile=250, gap=30, margin=90, max_rows=None):
 
 
 def maker_media(pack_dir, out_dir="maker-media", title=None, subtitle=None,
-                previews=None):
+                previews=None, animated=None):
     pack = Path(pack_dir)
     manifest = json.loads((pack / spec.FILE_MANIFEST).read_text())
     title = title or manifest.get("Name", "Icon Pack")
@@ -110,8 +113,72 @@ def maker_media(pack_dir, out_dir="maker-media", title=None, subtitle=None,
         _grid(g, chunk, y0=250, max_rows=3)
         g.save(out / f"gallery-{pg + 1}.png")
 
+    # --- animated gallery (when the pack has animated icons) ---
+    # The Maker Console gallery accepts MP4 (≤50 MB), so an animated grid is the
+    # place to SHOW motion in the listing. Emits gallery-animated.mp4 (if ffmpeg
+    # is present) + gallery-animated.webp from a folder of animated icons.
+    if animated:
+        animated_gallery(animated, out, title=title)
+
     print(ok(f"maker media → {out}/  (thumbnail + {len(prev)} previews "
              f"+ {pages} gallery, all at Maker Console dimensions)"))
     print(warn("  drag these into the console's Upload-media step; see "
                "docs/publishing.md"))
+    return out
+
+
+_ANIM_EXTS = (".webp", ".gif")
+
+
+def animated_gallery(anim_dir, out, title="", cols=8, cell=132, pad=10,
+                     fps=12, bg=(20, 20, 24)):
+    """Grid of ANIMATED icons → gallery-animated.mp4 (+ .webp) for Maker Console.
+
+    Each cell steps through its animated icon's frames; the grid loops. MP4 is
+    the gallery's animated slot (it has no alpha, so a dark bg is baked in);
+    the .webp keeps alpha for reuse elsewhere.
+    """
+    anim = sorted(p for p in Path(anim_dir).iterdir()
+                  if p.suffix.lower() in _ANIM_EXTS and not p.name.startswith("."))
+    if not anim:
+        print(warn(f"  no animated icons in {anim_dir} — skipping animated gallery"))
+        return None
+    ims = [Image.open(p) for p in anim]
+    nframes = max(getattr(i, "n_frames", 1) for i in ims)
+    rows = (len(anim) + cols - 1) // cols
+    W = cols * cell + (cols + 1) * pad
+    Hh = rows * cell + (rows + 1) * pad
+    frames = []
+    for k in range(nframes):
+        canvas = Image.new("RGBA", (W, Hh), bg + (255,))
+        for idx, im in enumerate(ims):
+            im.seek(k % getattr(im, "n_frames", 1))
+            fr = im.convert("RGBA").resize((cell - 14, cell - 14))
+            r, c = divmod(idx, cols)
+            canvas.alpha_composite(fr, (pad + c*(cell+pad) + 7, pad + r*(cell+pad) + 7))
+        frames.append(canvas)
+
+    webp = Path(out) / "gallery-animated.webp"
+    frames[0].save(webp, format="WEBP", save_all=True, append_images=frames[1:],
+                   duration=int(1000/fps), loop=0, quality=80, method=6)
+    mp4 = _encode_mp4(frames, Path(out) / "gallery-animated.mp4", fps)
+    print(ok(f"  animated gallery → {webp.name}" + (f" + {mp4.name}" if mp4 else "")
+             + f"  ({len(anim)} icons, {nframes}f)"))
+    return webp
+
+
+def _encode_mp4(frames, out, fps):
+    """RGB frames → looping-friendly H.264 MP4 via ffmpeg (None if unavailable)."""
+    if not shutil.which("ffmpeg"):
+        print(warn("  ffmpeg not found — skipping .mp4 (webp still written)"))
+        return None
+    with tempfile.TemporaryDirectory() as tmp:
+        for i, f in enumerate(frames):
+            f.convert("RGB").save(Path(tmp) / f"{i:04d}.png")
+        subprocess.run(
+            ["ffmpeg", "-y", "-loglevel", "error", "-framerate", str(fps),
+             "-i", str(Path(tmp) / "%04d.png"),
+             "-c:v", "libx264", "-pix_fmt", "yuv420p",
+             "-vf", "pad=ceil(iw/2)*2:ceil(ih/2)*2", "-movflags", "+faststart",
+             str(out)], check=True)
     return out
