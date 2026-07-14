@@ -135,6 +135,12 @@ Then in the console, **Products → Create product → Icons**, and walk the wiz
      `sdicons maker-media --animated`) here to show the icons in motion.
    - These are native file drops — must be done by the human (a tool driving
      the browser can't pick local files).
+   - ⚠️ **"1920×960" means the CONTENT must fit, not just the file.** Both WLED
+     packs were rejected 2026-07-14 for "cropping of information" even though the
+     files were exactly 1920×960 — the gallery's bottom row overflowed the 960 px
+     canvas and got sliced. `sdicons maker-media` now sizes tiles to fit; after
+     any layout change, eyeball `gallery-2.png` — the bottom row must sit clear of
+     the edge. File-dimension checks (`sips`) do NOT catch overflowing content.
 3. **Submit for review**
    - Summary shows Name / Stream Deck ID (reverse-domain, e.g.
      `com.you.mypack`) / Version.

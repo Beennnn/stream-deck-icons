@@ -102,6 +102,11 @@ def maker_media(pack_dir, out_dir="maker-media", title=None, subtitle=None,
     im.save(out / "thumbnail-1920x960.png")
 
     # --- gallery banners (1920×960), paginate the whole palette, ≥3 ---
+    # The 3 rows of 6 MUST fit inside the 960 px canvas, or the Maker Console
+    # shows a sliced bottom row — Elgato rejected v1 (2026-07-14) for exactly
+    # this "cropping of information". Header strip is 150 px, rows start at
+    # y0=190. Fit check with tile=220, gap=24: 190 + 3*220 + 2*24 = 898 ≤ 960 ✓
+    # (the old tile=250/y0=250 put the 3rd row at 810..1060 → 100 px cropped).
     per = 18
     pages = max(3, (len(icons) + per - 1) // per)
     for pg in range(pages):
@@ -110,7 +115,7 @@ def maker_media(pack_dir, out_dir="maker-media", title=None, subtitle=None,
         dd = ImageDraw.Draw(g)
         dd.rectangle([0, 0, W, 150], fill=_TILE)
         dd.text((80, 42), f"{title} — {pg + 1}/{pages}", font=_font(60), fill=_FG)
-        _grid(g, chunk, y0=250, max_rows=3)
+        _grid(g, chunk, y0=190, tile=220, gap=24, max_rows=3)
         g.save(out / f"gallery-{pg + 1}.png")
 
     # --- animated gallery: AUTOMATIC when the pack ships animated icons ---

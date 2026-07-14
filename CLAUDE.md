@@ -104,6 +104,28 @@ and submitting. All encoded in `docs/publishing.md` + `sdicons` itself:
 Built to turn `~/dev/music/wled-assets` effect GIFs into a Marketplace pack —
 see the WLED pack repo (sibling, built with this toolkit).
 
+## Maker Console gallery — content must FIT the frame, not just the file (2026-07-14)
+
+Both WLED packs were **rejected** the same day they were submitted with:
+*"ensure there was no cropping of information, please ensure all media for
+Marketplace is 1920×960."* The files WERE 1920×960 — the bug was that the
+gallery generator laid out **content that overflowed** the canvas: 3 rows of
+6 tiles at `tile=250, gap=30, y0=250` put the 3rd row at y 810..1060, so its
+bottom ~100 px was sliced off by the 960 px edge. The reviewer reads a sliced
+bottom row as "cropped information", even though the file dimensions are exact.
+
+- **Rule**: a hero/gallery banner is only valid if every drawn row fits fully
+  inside 960 px. The fit is `y0 + rows·tile + (rows-1)·gap ≤ 960`. The thumbnail
+  was fine because it used `max_rows=2`; only the 3-row gallery overflowed.
+- **Fix** (`makermedia.py`): gallery tiles 250→220, `y0` 250→190 → 3 full rows
+  fit (`190 + 3·220 + 2·24 = 898 ≤ 960`). Keeps 18 icons/page. Verify any layout
+  change by eyeballing `gallery-2.png` — the bottom row must have a margin below
+  it, never touch the edge.
+- **Verify programmatically**: file dims via `sips`/Pillow catch the wrong
+  *canvas* size, NOT overflowing content. There's no substitute for looking at
+  a regenerated banner. Add a `validate`-style content-fit assertion here if
+  this recurs.
+
 ## Conventions
 
 - Commits + README + docs in **English** (portfolio/tooling repo, pushed to
