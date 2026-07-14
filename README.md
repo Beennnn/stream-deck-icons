@@ -9,6 +9,27 @@ display, …). It's a reference, not a framework: a checklist you can copy from.
 
 ---
 
+## Plugins I've built with this
+
+The real plugins these notes come from — read them alongside as worked examples:
+
+- **[Wi-Fi Picker](https://github.com/Beennnn/streamdeck-wifi-picker)** — switch
+  between your saved Wi-Fi networks from a key or a Stream Deck+ dial (macOS). Its
+  docs are the deep dive on the **macOS Location wall** and the honest limits.
+- **[Bluetooth Picker](https://github.com/Beennnn/streamdeck-wifi-picker)** —
+  connect / disconnect paired Bluetooth devices from a key or dial; **bundles a
+  universal `blueutil`** — the native-helper + quarantine pattern in practice.
+  *(Same repo as Wi-Fi Picker; the two ship as separate plugins from one source
+  tree — see the two-bundles Rollup setup.)*
+- **[MIDI Note Display](https://github.com/Beennnn/streamdeck-midi-note-display)** —
+  a Stream Deck+ dial showing a MIDI value as a note name + mini piano (via the
+  Trevliga Spel MIDI plugin) — the custom **dial-layout** technique in the wild.
+- **LumiDeck** — drive WLED / Tuya lamps (colours, brightness, CCT, effects,
+  scenes, groups, Stream Deck+ dials), 100% local & cloud-free. On the
+  [Elgato Marketplace (BenLab)](https://marketplace.elgato.com/@benlab).
+
+---
+
 ## The toolchain
 
 | Tool | What it does | Install |
