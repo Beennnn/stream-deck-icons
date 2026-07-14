@@ -78,8 +78,8 @@ def main(argv=None):
     sp.add_argument("--previews",
                     help="comma-separated icon slugs for the 5 preview tiles")
     sp.add_argument("--animated",
-                    help="dir of animated icons (gif/webp) → also emit an "
-                         "animated gallery mp4/webp for the listing")
+                    help="override: dir to source the animated gallery from "
+                         "(default: auto — the pack's own gif/webp icons)")
 
     sp = sub.add_parser("animate",
                         help="assemble frame images into a GIF/WEBP animated icon")

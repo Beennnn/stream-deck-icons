@@ -51,25 +51,43 @@ def _resize_static(src: Path, dst: Path, size, resample):
     frame.save(dst)
 
 
-def _resize_gif(im: Image.Image, dst: Path, size):
-    """Resize an animated GIF in palette mode — exact colours, kept alpha.
+_TRANSPARENT_IDX = 255  # palette slot reserved for transparent pixels
 
-    Each frame is composited (seek resolves disposal) then NEAREST-resized in
-    P mode, so palette indices — including the transparency index — are copied
-    verbatim. For an integer upscale (72->144) this is a lossless pixel double.
+
+def _rgba_to_p(rgba: Image.Image):
+    """RGBA -> palette image with index 255 reserved for transparent pixels.
+
+    GIF alpha is 1-bit, so alpha is thresholded. Quantizing to 255 colours
+    leaves index 255 free; every transparent pixel is pasted to it and the
+    frame declares that index transparent — the key to keeping transparency on
+    EVERY frame (not just frame 0).
     """
-    transparency = im.info.get("transparency")
+    p = rgba.convert("RGB").quantize(colors=255, method=Image.FASTOCTREE)
+    mask = rgba.getchannel("A").point(lambda a: 255 if a < 128 else 0)
+    p.paste(_TRANSPARENT_IDX, mask)
+    p.info["transparency"] = _TRANSPARENT_IDX
+    return p
+
+
+def _resize_gif(im: Image.Image, dst: Path, size):
+    """Resize an animated GIF, keeping per-frame transparency intact.
+
+    Each frame is composited to RGBA (seek resolves disposal), NEAREST-resized
+    (an integer upscale is a lossless pixel double), then re-quantized with a
+    reserved transparent index. Copying P-mode frames verbatim instead drops
+    frames 1..n's transparency, so the key colour flashes opaque mid-loop —
+    which is exactly the bug this compositing path avoids.
+    """
     loop = im.info.get("loop", 0)
     frames, durations = [], []
     for i in range(getattr(im, "n_frames", 1)):
         im.seek(i)
         durations.append(im.info.get("duration", 100))
-        frames.append(im.copy().resize((size, size), Image.NEAREST))
-    save_kw = dict(save_all=True, append_images=frames[1:],
-                   duration=durations, loop=loop, disposal=2, optimize=False)
-    if transparency is not None:
-        save_kw["transparency"] = transparency
-    frames[0].save(dst, **save_kw)
+        rgba = im.convert("RGBA").resize((size, size), Image.NEAREST)
+        frames.append(_rgba_to_p(rgba))
+    frames[0].save(dst, save_all=True, append_images=frames[1:],
+                   duration=durations, loop=loop, disposal=2,
+                   transparency=_TRANSPARENT_IDX, optimize=False)
 
 
 def _resize_webp(im: Image.Image, dst: Path, size, resample):

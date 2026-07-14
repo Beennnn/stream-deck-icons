@@ -113,12 +113,20 @@ def maker_media(pack_dir, out_dir="maker-media", title=None, subtitle=None,
         _grid(g, chunk, y0=250, max_rows=3)
         g.save(out / f"gallery-{pg + 1}.png")
 
-    # --- animated gallery (when the pack has animated icons) ---
-    # The Maker Console gallery accepts MP4 (≤50 MB), so an animated grid is the
-    # place to SHOW motion in the listing. Emits gallery-animated.mp4 (if ffmpeg
-    # is present) + gallery-animated.webp from a folder of animated icons.
+    # --- animated gallery: AUTOMATIC when the pack ships animated icons ---
+    # The Maker Console gallery accepts MP4 (≤50 MB) — the one slot where a
+    # listing can SHOW motion. So an animated pack gets an animated gallery for
+    # free: we detect the pack's own gif/webp icons (no flag needed). --animated
+    # stays as an override to source the grid from a different folder.
     if animated:
-        animated_gallery(animated, out, title=title)
+        anim_src = sorted(p for p in Path(animated).iterdir()
+                          if p.suffix.lower() in _ANIM_EXTS and not p.name.startswith("."))
+    else:
+        anim_src = [p for p in icons if p.suffix.lower() in _ANIM_EXTS]
+    if anim_src:
+        animated_gallery(anim_src, out, title=title)
+    else:
+        print(warn("  (static pack — no animated gallery)"))
 
     print(ok(f"maker media → {out}/  (thumbnail + {len(prev)} previews "
              f"+ {pages} gallery, all at Maker Console dimensions)"))
@@ -130,40 +138,56 @@ def maker_media(pack_dir, out_dir="maker-media", title=None, subtitle=None,
 _ANIM_EXTS = (".webp", ".gif")
 
 
-def animated_gallery(anim_dir, out, title="", cols=8, cell=132, pad=10,
-                     fps=12, bg=(20, 20, 24)):
+def animated_gallery(anim, out, title="", cols=10, fps=8, max_icons=50):
     """Grid of ANIMATED icons → gallery-animated.mp4 (+ .webp) for Maker Console.
 
-    Each cell steps through its animated icon's frames; the grid loops. MP4 is
-    the gallery's animated slot (it has no alpha, so a dark bg is baked in);
-    the .webp keeps alpha for reuse elsewhere.
+    `anim` is a list of gif/webp paths (or a directory). Samples up to
+    `max_icons` evenly for visual diversity, tiles them on a 1920×960 (2:1)
+    canvas matching the static hero/gallery banners (dark bg + title strip),
+    steps every cell through its frames, and loops. NEAREST keeps the LED
+    pixel-art crisp. MP4 is the gallery's animated slot (no alpha → dark bg
+    baked in); the .webp keeps alpha for reuse elsewhere.
     """
-    anim = sorted(p for p in Path(anim_dir).iterdir()
-                  if p.suffix.lower() in _ANIM_EXTS and not p.name.startswith("."))
-    if not anim:
-        print(warn(f"  no animated icons in {anim_dir} — skipping animated gallery"))
+    if isinstance(anim, (str, Path)):
+        anim = sorted(p for p in Path(anim).iterdir()
+                      if p.suffix.lower() in _ANIM_EXTS and not p.name.startswith("."))
+    paths = [Path(p) for p in anim if Path(p).suffix.lower() in _ANIM_EXTS]
+    if not paths:
+        print(warn("  no animated icons — skipping animated gallery"))
         return None
-    ims = [Image.open(p) for p in anim]
+    # even sample across the set so the montage stays visually diverse
+    if len(paths) > max_icons:
+        step = len(paths) / max_icons
+        paths = [paths[int(i * step)] for i in range(max_icons)]
+
+    W, H = spec.MAKER_HERO_SIZE            # 1920×960, matches the static banners
+    tile, top = 144, (70 if title else 30)
+    rows = (len(paths) + cols - 1) // cols
+    gap_x = (W - cols * tile) // (cols + 1)
+    gap_y = max(8, (H - top - rows * tile) // (rows + 1))
+
+    ims = [Image.open(p) for p in paths]
     nframes = max(getattr(i, "n_frames", 1) for i in ims)
-    rows = (len(anim) + cols - 1) // cols
-    W = cols * cell + (cols + 1) * pad
-    Hh = rows * cell + (rows + 1) * pad
+    tfont = _font(40)
     frames = []
     for k in range(nframes):
-        canvas = Image.new("RGBA", (W, Hh), bg + (255,))
+        canvas = Image.new("RGBA", (W, H), _BG + (255,))
+        if title:
+            ImageDraw.Draw(canvas).text((gap_x, 20), title, font=tfont, fill=_FG)
         for idx, im in enumerate(ims):
             im.seek(k % getattr(im, "n_frames", 1))
-            fr = im.convert("RGBA").resize((cell - 14, cell - 14))
+            fr = im.convert("RGBA").resize((tile, tile), Image.NEAREST)
             r, c = divmod(idx, cols)
-            canvas.alpha_composite(fr, (pad + c*(cell+pad) + 7, pad + r*(cell+pad) + 7))
+            canvas.alpha_composite(fr, (gap_x + c * (tile + gap_x),
+                                        top + gap_y + r * (tile + gap_y)))
         frames.append(canvas)
 
     webp = Path(out) / "gallery-animated.webp"
     frames[0].save(webp, format="WEBP", save_all=True, append_images=frames[1:],
-                   duration=int(1000/fps), loop=0, quality=80, method=6)
+                   duration=int(1000 / fps), loop=0, quality=80, method=6)
     mp4 = _encode_mp4(frames, Path(out) / "gallery-animated.mp4", fps)
     print(ok(f"  animated gallery → {webp.name}" + (f" + {mp4.name}" if mp4 else "")
-             + f"  ({len(anim)} icons, {nframes}f)"))
+             + f"  ({len(paths)} icons, {nframes}f, {W}×{H})"))
     return webp
 
 

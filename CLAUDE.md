@@ -81,11 +81,17 @@ and submitting. All encoded in `docs/publishing.md` + `sdicons` itself:
 ## Animated icons (added 2026-07-14)
 
 `render` handles animated GIF/WEBP as first-class, not just static rasters:
-- **GIF** → resized in palette (P) mode with NEAREST, per-frame composited via
-  `seek` (disposal resolved). Palette + transparency index copied verbatim, so
-  a ×2 upscale (WLED 72→144) is a lossless pixel double. Pillow merges only
-  truly-identical consecutive frames on save (total loop duration unchanged —
-  verified: ps-hourglass 14→11 frames, 1760 ms both).
+- **GIF** → each frame composited to RGBA via `seek` (disposal resolved),
+  NEAREST-resized (×2 upscale of WLED 72→144 is a lossless pixel double), then
+  re-quantized to a palette with index 255 reserved for transparency.
+  - ⚠️ **Transparency gotcha (fixed 2026-07-14):** the earlier version copied
+    P-mode frames verbatim (`im.copy()`), which kept transparency on frame 0
+    but DROPPED it on frames 1..n — the palette key colour (green, index 255)
+    then flashed **opaque** mid-loop on the deck. Symptom surfaced in the
+    animated maker-media montage (green tiles). Fix = composite→RGBA→requantize
+    with a reserved transparent index (`_rgba_to_p`), applied to every frame.
+    Verify with: seek each frame, `convert("RGBA").getpixel((0,0))[3]` must be
+    0 on transparent-corner icons. Never revert to the verbatim-copy path.
 - **WEBP** → RGBA throughout, honours the `--resample` filter.
 - Static PNG/JPEG are now **resized** to 144×144 (were copied verbatim, which
   left off-size rasters for `validate` to reject).
