@@ -55,10 +55,30 @@ def _tile(icon_path, size):
     return t
 
 
+_STATIC_EXTS = {".svg", ".png", ".jpg", ".jpeg"}
+
+
 def _icons(pack: Path):
+    """One tile per icon for the static montages (previews/hero/gallery).
+
+    A pack that ships both a static icon and its animated "<x>-playing.webp"
+    active-state variant has TWO files per icon that look identical on a frozen
+    frame — including both duplicates every tile in the thumbnail. Collapse to
+    one entry per base icon (strip a "-playing" suffix and dedupe same-stem
+    static/animated pairs), preferring the static file. The animated gallery is
+    built separately from the `animated` source dir, so it is unaffected.
+    """
     d = pack / spec.DIR_ICONS
-    return sorted(p for p in d.iterdir()
-                  if p.suffix.lower() in spec.ICON_FORMATS and not p.name.startswith("."))
+    cands = [p for p in d.iterdir()
+             if p.suffix.lower() in spec.ICON_FORMATS and not p.name.startswith(".")]
+    best: dict[str, Path] = {}
+    for p in cands:
+        base = p.stem[:-8] if p.stem.endswith("-playing") else p.stem
+        cur = best.get(base)
+        if cur is None or (p.suffix.lower() in _STATIC_EXTS
+                           and cur.suffix.lower() not in _STATIC_EXTS):
+            best[base] = p
+    return sorted(best.values())
 
 
 def _grid(img, icons, y0, cols=6, tile=250, gap=30, margin=90, max_rows=None):
