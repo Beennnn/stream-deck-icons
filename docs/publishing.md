@@ -201,6 +201,30 @@ in `makermedia.py`; documented here so the next pack doesn't relearn them.
   the static file. The animated gallery is built from the separate `animated`
   source dir, so it never had the dup and is unaffected.
 
+## Animated icons must be GIF, not PIL-optimised WebP (verified 2026-07-16 — a rejection)
+
+Stage Keys v1.2 was **rejected**: *"we aren't able to get the animated icons
+working when assigning them to keys. Please ensure that animated icons are GIF
+and/or WebP."* The animated icons were **WebP** produced by PIL — *technically*
+valid (webpmux showed 24 frames, 83 ms, loop 0, transparency) but encoded as
+**partial-frame** (sub-rectangle + dispose/blend) optimised WebP that **Stream
+Deck's key decoder does not play**. Cross-check clinched it: every OTHER
+published pack of ours uses GIF for animation (WLED Effects — 216 GIFs, live &
+working); none ship WebP. WebP was the one outlier, and it's the one that failed.
+
+- **Ship animated icons as GIF** (`<slug>-playing.gif`). `save_animated` picks
+  format by output extension; the build now writes `.gif`.
+- **GIF transparency must be applied per-frame.** A raw RGBA GIF save keeps
+  alpha only on frame 0 — the palette key colour then flashes opaque mid-loop.
+  `save_animated`'s GIF branch routes every frame through `render._rgba_to_p`
+  (quantise to 255 colours + reserve index 255 as transparent + `transparency=`
+  + `disposal=2`). Verify: seek every frame, the transparent-corner alpha must
+  be 0 on all of them (not just frame 0).
+- GIF is 1-bit alpha (edges thresholded at ~50%) — fine on the dark key
+  background, and flat icon art stays within 255 colours. Frame count collapses
+  where states repeat (an arpeggio's 4 steps → 4 held frames), which reads as a
+  deliberate slow loop, not a bug. Sizes stay ≤~80 KB, well under the 1 MB cap.
+
 ## Pre-submission checklist
 
 - [ ] Every icon is 144 × 144 px (`sdicons validate` enforces).

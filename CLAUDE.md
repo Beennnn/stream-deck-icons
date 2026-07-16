@@ -126,6 +126,16 @@ bottom row as "cropped information", even though the file dimensions are exact.
   a regenerated banner. Add a `validate`-style content-fit assertion here if
   this recurs.
 
+## Animated icons ship as GIF, not WebP (verified 2026-07-16 — a rejection)
+
+Stage Keys v1.2 was **rejected**: the reviewer couldn't get the WebP animated
+icons to play on keys. PIL-optimised (partial-frame) animated WebP is valid per
+spec but Stream Deck's key decoder won't play it. **Ship animated icons as GIF**
+(`<slug>-playing.gif`) — the format every working animated pack of ours uses
+(WLED Effects, 216 GIFs, live). `save_animated`'s GIF branch now applies
+`render._rgba_to_p` per frame (else alpha survives only on frame 0 — key colour
+flashes opaque mid-loop). Full detail in `docs/publishing.md`.
+
 ## Media + version-update gotchas (verified 2026-07-16, Stage Keys v1.2)
 
 Learned shipping the Stage Keys v1.2 update. Full detail in `docs/publishing.md`
