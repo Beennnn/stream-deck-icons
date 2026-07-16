@@ -153,6 +153,47 @@ Review by Elgato follows; then (if auto-publish) it goes live on Marketplace.
 Product & branding guidelines: <https://docs.elgato.com/guidelines/stream-deck/icons/>.
 General docs: <https://docs.elgato.com/stream-deck/icons/getting-started/>.
 
+## Updating a published product — new version (verified 2026-07-16)
+
+Shipping an update to an ALREADY-published product is a different, smaller flow
+than the first-submission wizard above. Learned shipping Stage Keys v1.2.
+
+- **Where**: Products → *your product* → **Versions** tab → **Create version**.
+  The modal is minimal: a `.streamDeckIconPack` drop zone (≤500 MB) + **Release
+  notes** (required, ≤1500 chars) + **Automatically publish after being
+  approved** toggle + **Submit for review**. No Details/Media steps here.
+- **"Create version" is disabled only while a prior version is *Pending
+  review*.** A **Published** product accepts a new version immediately; the new
+  version stacks (e.g. a never-submitted 1.1 is simply superseded by 1.2).
+- **Media is product-level, not version-level.** Thumbnail / icon previews /
+  gallery live on the **Media** tab and can be updated **any time** — including
+  while a version is Pending review. They are NOT part of the Create-version
+  modal, so update them separately.
+- **Release-notes editor rejects some Unicode.** The rich-text field dropped a
+  paste containing em-dashes (`—`) silently (counter stayed 0). Use ASCII
+  hyphens; verify the char counter moved before trusting it.
+
+## Media gotchas — the two that bit us (verified 2026-07-16)
+
+Both surfaced building the Stage Keys v1.2 media (`sdicons maker-media`). Fixed
+in `makermedia.py`; documented here so the next pack doesn't relearn them.
+
+- **Icon previews MUST be transparent PNG (RGBA), never opaque RGB.** The
+  console's "Icon previews" slot **silently rejects an opaque upload** — the
+  drop appears to take, then the slot **blanks out** ("the previews
+  disappear"). It wants the transparent icon art and renders it on its own
+  tile. `maker-media` used to bake a dark tile and `convert("RGB")` the
+  preview (no alpha) → rejected. Now it emits the icon resized to 144×144 in
+  **RGBA** (alpha preserved). The hero thumbnail and gallery banners stay
+  opaque RGB — those are flat banners, not icon slots, so they're fine.
+- **Static+animated packs duplicate every montage tile.** A pack shipping both
+  `<x>.png` and its animated `<x>-playing.webp` active-state variant listed
+  BOTH in the thumbnail/gallery montages (identical on a frozen frame) → every
+  icon appeared **twice**. `_icons()` now collapses to one tile per base icon
+  (strips a `-playing` suffix, dedupes same-stem static/animated), preferring
+  the static file. The animated gallery is built from the separate `animated`
+  source dir, so it never had the dup and is unaffected.
+
 ## Pre-submission checklist
 
 - [ ] Every icon is 144 × 144 px (`sdicons validate` enforces).

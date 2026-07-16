@@ -126,6 +126,24 @@ bottom row as "cropped information", even though the file dimensions are exact.
   a regenerated banner. Add a `validate`-style content-fit assertion here if
   this recurs.
 
+## Media + version-update gotchas (verified 2026-07-16, Stage Keys v1.2)
+
+Learned shipping the Stage Keys v1.2 update. Full detail in `docs/publishing.md`
+("Updating a published product" + "Media gotchas"). The three that cost time:
+
+1. **Icon previews must be transparent RGBA, not opaque RGB.** The Maker Console
+   "Icon previews" slot silently rejects an opaque upload — it blanks out
+   ("previews disappear"). `makermedia.py` now emits previews as resized RGBA
+   (was baking a dark tile + RGB-converting). Hero/gallery banners stay RGB.
+2. **Static+animated packs duplicated every montage tile** — `<x>.png` AND
+   `<x>-playing.webp` both listed (identical frozen). `_icons()` now dedupes to
+   one per base icon, preferring the static.
+3. **Updating a published product** = Product → Versions → Create version
+   (minimal modal: pack file + release notes + auto-publish + Submit). Media is
+   product-level (Media tab), editable anytime — NOT in the version modal.
+   "Create version" is blocked only while a prior version is Pending review.
+   The release-notes rich editor silently drops em-dashes — use ASCII hyphens.
+
 ## Conventions
 
 - Commits + README + docs in **English** (portfolio/tooling repo, pushed to
