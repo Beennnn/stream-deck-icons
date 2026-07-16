@@ -5,6 +5,13 @@ a pack, exporting through Elgato's Icon Pack Man, inspecting the bytes, and
 submitting. The gotchas are real and cost hours the first time — they're
 encoded here (and in `sdicons` itself) so the next palette is a one-liner.
 
+> **This file is the icon-**pack** track** (`.streamDeckIconPack`). Publishing a
+> **plugin** (`.streamDeckPlugin`) is a different container + review — its
+> rejection log + checklist live in
+> [streamdeck-plugin-toolkit/docs/MARKETPLACE-REVIEW.md](https://github.com/Beennnn/streamdeck-plugin-toolkit/blob/main/docs/MARKETPLACE-REVIEW.md).
+> The **Maker Console media** rules below (1920×960 content-fit, RGBA previews,
+> release-notes Unicode) are shared — plugin galleries hit the same traps.
+
 ## TL;DR — the fast path (Icon Pack Man not required)
 
 `sdicons package` now emits the **exact container Elgato expects**, so for a

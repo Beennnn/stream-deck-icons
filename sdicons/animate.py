@@ -46,9 +46,14 @@ def save_animated(frames, out, fps=15):
     out = Path(out)
     dur = int(round(1000 / fps))
     if out.suffix.lower() == ".gif":
-        # GIF: composite onto nothing, 1-bit alpha via a reserved index.
-        frames[0].save(out, save_all=True, append_images=frames[1:],
-                       duration=dur, loop=0, disposal=2, optimize=False)
+        # GIF: 1-bit alpha via a reserved palette index, applied to EVERY frame
+        # (a raw RGBA save keeps alpha only on frame 0 — the key colour then
+        # flashes opaque mid-loop; see render._rgba_to_p / the CLAUDE.md gotcha).
+        from .render import _rgba_to_p, _TRANSPARENT_IDX
+        pal = [_rgba_to_p(f.convert("RGBA")) for f in frames]
+        pal[0].save(out, save_all=True, append_images=pal[1:],
+                    duration=dur, loop=0, disposal=2,
+                    transparency=_TRANSPARENT_IDX, optimize=False)
     else:
         frames[0].save(out, format="WEBP", save_all=True,
                        append_images=frames[1:], duration=dur, loop=0,
