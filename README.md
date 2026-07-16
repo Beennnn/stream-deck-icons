@@ -16,11 +16,11 @@ The real plugins these notes come from — read them alongside as worked example
 - **[Wi-Fi Switcher](https://github.com/Beennnn/streamdeck-wifi-picker)** — switch
   between your saved Wi-Fi networks from a key or a Stream Deck+ dial (macOS). Its
   docs are the deep dive on the **macOS Location wall** and the honest limits.
-- **[Bluetooth Switcher](https://github.com/Beennnn/streamdeck-wifi-picker)** —
+- **[Bluetooth Switcher](https://github.com/Beennnn/streamdeck-bluetooth-switcher)** —
   connect / disconnect paired Bluetooth devices from a key or dial; **bundles a
   universal `blueutil`** — the native-helper + quarantine pattern in practice.
-  *(Same repo as Wi-Fi Switcher; the two ship as separate plugins from one source
-  tree — see the two-bundles Rollup setup.)*
+  *(Split out of the Wi-Fi Switcher repo into its own; see §2 of the review
+  playbook for the stale-reference cleanup that split required.)*
 - **[MIDI Note Display](https://github.com/Beennnn/streamdeck-midi-note-display)** —
   a Stream Deck+ dial showing a MIDI value as a note name + mini piano (via the
   Trevliga Spel MIDI plugin) — the custom **dial-layout** technique in the wild.
@@ -98,6 +98,11 @@ per-bundle `outDir` to `@rollup/plugin-typescript` or it errors on the second on
 ---
 
 ## Marketplace requirements (the ones that block submission)
+
+> **Getting through the human review** is a separate skill from meeting the
+> machine checks — white in-app icons, no stale cross-plugin references, a strong
+> gallery, and a demo video are what actually get plugins rejected. Full rejection
+> log + fixes + a pre-submission checklist: **[docs/MARKETPLACE-REVIEW.md](docs/MARKETPLACE-REVIEW.md)**.
 
 Maker Console silently disables **Continue** if these aren't met — check them first:
 
