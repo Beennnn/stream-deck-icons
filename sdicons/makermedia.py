@@ -105,11 +105,18 @@ def maker_media(pack_dir, out_dir="maker-media", title=None, subtitle=None,
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
 
-    # --- 5 icon previews (144×144) ---
+    # --- 5 icon previews (144×144, TRANSPARENT RGBA) ---
+    # The Maker Console "Icon previews" slot expects the transparent icon art —
+    # it renders each on its own tile. An OPAQUE (RGB, no alpha) upload is
+    # silently rejected: the slot blanks out ("the previews disappear"). So keep
+    # the icon's alpha; do NOT bake a tile / convert to RGB here. (The hero and
+    # gallery banners DO tile onto a dark background — that's fine, they're flat
+    # RGB banners, not icon-preview slots.)
     prev = ([by_stem[s] for s in previews if s in by_stem] if previews
             else icons)[:5]
+    sz = spec.MAKER_PREVIEW_SIZE
     for i, ic in enumerate(prev, 1):
-        _tile(ic, spec.MAKER_PREVIEW_SIZE).convert("RGB").save(out / f"preview-{i}.png")
+        Image.open(ic).convert("RGBA").resize((sz, sz)).save(out / f"preview-{i}.png")
 
     # --- thumbnail (1920×960 hero) ---
     W, H = spec.MAKER_HERO_SIZE
