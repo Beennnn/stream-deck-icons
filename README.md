@@ -72,6 +72,8 @@ values survive every `meta`/`build` re-run:
 | `render`   | source dir → 144×144 icons in `pack/icons/` (SVG/PNG/JPEG static, GIF/WEBP animated frame-by-frame) |
 | `meta`     | (re)generate `icons.json` from `icons/` + `tags.json` |
 | `validate` | lint the pack against the Elgato spec (exit 1 on error) |
+| `verify`   | **pre-publication gate**: validate + Maker-Console rejection checks (`--fix`, `--strict`; also verifies a shipped `.streamDeckIconPack`) |
+| `posters`  | generate companion poster PNGs for animated icons (required by the Icon Library) |
 | `contact`  | build a contact-sheet PNG of the whole palette |
 | `package`  | build a **submit-ready** `.streamDeckIconPack` (correct `<id>.sdIconPack/` container) |
 | `build`    | all of the above, end to end |

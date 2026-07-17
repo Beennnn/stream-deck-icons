@@ -29,6 +29,22 @@ ANIM_FPS_RANGE = (10, 20)
 ANIM_MAX_SECONDS = 5
 ANIM_MAX_BYTES = 1_000_000  # ~1 MB preferred ceiling
 
+# ── Animated-icon companion poster (HARD requirement — verified 2026-07-17 by
+# reverse-engineering iconpackman.elgato.com's own export code) ──────────────
+# The Stream Deck **Icon Library** renders each icon's grid cell from a STATIC
+# poster image; for an animated icon it plays the GIF/WEBP only on hover. So a
+# GIF with NO poster shows a broken tile — exactly the defect Elgato rejected
+# "Music Instruments for Stage Keys" 1.2 for on 2026-07-17:
+#   "the preview images of the GIFs aren't loading, please ensure this icon
+#    pack is packaged correctly via iconpackman before resubmitting."
+# iconpackman guarantees the poster: for every `<base>.gif`, its exporter looks
+# for a sibling `<base>.png` and, if absent, GENERATES one from the GIF's first
+# frame (`canvas.drawImage(gif,0,0) -> toDataURL("image/png")`), writing it into
+# `icons/<base>.png`. The poster is NOT listed in icons.json — it is resolved by
+# same-base-name convention. sdicons `package` now reproduces this exactly, and
+# `verify` FAILS a pack whose animated icons lack their companion poster.
+POSTER_EXT = ".png"  # companion poster for an animated icon shares its base name
+
 # manifest.json required + optional fields (exact casing Elgato expects).
 MANIFEST_REQUIRED = ("Name", "Author", "Version", "Icon")
 MANIFEST_OPTIONAL = ("Description", "URL", "Licence", "License")

@@ -154,6 +154,49 @@ Learned shipping the Stage Keys v1.2 update. Full detail in `docs/publishing.md`
    "Create version" is blocked only while a prior version is Pending review.
    The release-notes rich editor silently drops em-dashes — use ASCII hyphens.
 
+## Animated icons MUST ship a companion poster PNG (verified 2026-07-17)
+
+**The #1 way an animated pack gets rejected.** Maker Console rejected Stage Keys
+1.2 on 2026-07-17: *"the preview images of the GIFs aren't loading, please ensure
+this icon pack is packaged correctly via iconpackman."* Root cause, found by
+reverse-engineering iconpackman.elgato.com's own export JS:
+
+- The Stream Deck **Icon Library** renders each grid cell from a STATIC image and
+  only plays the animation on hover. A GIF with no static poster shows a broken
+  tile.
+- iconpackman guarantees the poster: for every `icons/<base>.gif`, it looks for a
+  sibling `icons/<base>.png` and, if absent, GENERATES one from the GIF's first
+  frame (`canvas.drawImage(gif,0,0) → toDataURL("image/png")`). The poster is
+  **NOT listed in icons.json** — the Library resolves it by same-base-name.
+- Our earlier `sdicons package` copied the GIFs but wrote no posters → the
+  rejection. Fixed: `posters.py` generates them, `package` calls `ensure_posters`
+  before zipping, and `verify` FAILS a pack whose animations lack posters.
+
+Never hand-remove the `<base>.png` posters from `icons/`, and never add them to
+icons.json (that would double every animated icon in the grid).
+
+## `verify` — the pre-publication gate (run before EVERY submission)
+
+`validate` = "is this structurally valid?". `verify` = "will Maker Console accept
+this?" — a strict superset that also catches the real rejections:
+
+```
+bin/sdicons verify MyPack                 # exit 1 on any ERROR
+bin/sdicons verify MyPack --fix           # generate missing posters, then verify
+bin/sdicons verify MyPack --strict        # warnings become blocking
+bin/sdicons verify dist/foo.streamDeckIconPack   # verify the SHIPPED bytes
+bin/sdicons posters MyPack                # just (re)generate companion posters
+```
+
+Checks (each finding is `[code]`-tagged, ERROR/WARN/INFO): `missing-poster`,
+`poster-size`/`poster-format`, `bad-tag` (iconpackman rejects `", "` in a tag),
+`dup-path`/`dup-name`, `filename-case`/`-space`, manifest store-quality
+(`no-description`/`no-url`/`no-licence`), `too-many-previews`, `empty-pack`, plus
+all structural errors folded in. `verify_container` unzips a `.streamDeckIconPack`
+and checks the real bytes — run it on `dist/` right before uploading to catch a
+stale container built before a fix. Tests: `tests/test_verify*.py`,
+`tests/test_posters.py` (49 tests, ~96% coverage — `python3 -m pytest tests/`).
+
 ## Conventions
 
 - Commits + README + docs in **English** (portfolio/tooling repo, pushed to

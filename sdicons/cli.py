@@ -5,6 +5,8 @@ Subcommands (each maps to one cohesive module):
   render    SVG source dir -> 144x144 icons in pack/icons/
   meta      (re)generate icons.json from icons/ + optional tags.json sidecar
   validate  lint the pack against the Elgato spec
+  verify    pre-publication gate: validate + Maker-Console rejection checks
+  posters   generate companion poster PNGs for animated icons (Icon Library)
   contact   build a contact-sheet PNG of the whole palette
   package   zip a validated pack into a submit-ready .streamDeckIconPack
   build     render + meta + validate + contact + package, end to end
@@ -44,6 +46,18 @@ def main(argv=None):
     sp.add_argument("pack")
 
     sp = sub.add_parser("validate", help="lint the pack against the spec")
+    sp.add_argument("pack")
+
+    sp = sub.add_parser("verify",
+                        help="pre-publication gate (validate + rejection checks)")
+    sp.add_argument("pack", help="pack directory OR a .streamDeckIconPack container")
+    sp.add_argument("--strict", action="store_true",
+                    help="treat warnings as blocking (exit non-zero on any warning)")
+    sp.add_argument("--fix", action="store_true",
+                    help="generate missing animated-icon posters before verifying")
+
+    sp = sub.add_parser("posters",
+                        help="generate companion poster PNGs for animated icons")
     sp.add_argument("pack")
 
     sp = sub.add_parser("contact", help="build a contact-sheet PNG")
@@ -108,6 +122,31 @@ def main(argv=None):
         errors, warnings = validate(args.pack)
         print_report(args.pack, errors, warnings)
         sys.exit(1 if errors else 0)
+
+    elif args.cmd == "verify":
+        from pathlib import Path as _P
+        from . import spec as _spec
+        from .verify import verify, verify_container, print_report, has_blocking
+        target = args.pack
+        if _P(target).is_file() and target.endswith(_spec.PACK_EXT):
+            findings = verify_container(target)
+        else:
+            if args.fix:
+                from .posters import ensure_posters
+                from . import spec as _spec
+                made = ensure_posters(_P(target) / _spec.DIR_ICONS, verbose=True)
+                if made:
+                    print(f"→ generated {len(made)} poster(s)")
+            findings = verify(target)
+        print_report(target, findings, strict=args.strict)
+        sys.exit(1 if has_blocking(findings, strict=args.strict) else 0)
+
+    elif args.cmd == "posters":
+        from pathlib import Path as _P
+        from .posters import ensure_posters
+        from . import spec as _spec
+        made = ensure_posters(_P(args.pack) / _spec.DIR_ICONS, verbose=True)
+        print(f"→ {len(made)} poster(s) generated")
 
     elif args.cmd == "contact":
         from .contact import contact_sheet

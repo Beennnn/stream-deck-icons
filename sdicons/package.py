@@ -29,6 +29,7 @@ from pathlib import Path
 
 from . import spec
 from .validate import validate
+from .posters import ensure_posters
 from .util import ok, warn, err, slug
 
 # Files that belong in the shipped pack (everything else is dev cruft).
@@ -47,6 +48,12 @@ def derive_pack_id(manifest):
 
 def package(pack_dir, out_dir="dist", pack_id=None):
     pack = Path(pack_dir)
+    # Generate any missing animated-icon posters BEFORE validating/zipping, so
+    # the shipped container always carries the `<base>.png` the Stream Deck Icon
+    # Library needs (the iconpackman behaviour — see posters.py). Idempotent.
+    made = ensure_posters(pack / spec.DIR_ICONS)
+    if made:
+        print(ok(f"  generated {len(made)} companion poster(s) for animated icons"))
     errors, _ = validate(pack)
     if errors:
         raise SystemExit(err(f"refusing to package: {len(errors)} validation "
