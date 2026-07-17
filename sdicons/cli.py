@@ -49,12 +49,18 @@ def main(argv=None):
     sp.add_argument("pack")
 
     sp = sub.add_parser("verify",
-                        help="pre-publication gate (validate + rejection checks)")
+                        help="pre-publication gate — check only, never writes")
     sp.add_argument("pack", help="pack directory OR a .streamDeckIconPack container")
     sp.add_argument("--strict", action="store_true",
                     help="treat warnings as blocking (exit non-zero on any warning)")
     sp.add_argument("--fix", action="store_true",
-                    help="generate missing animated-icon posters before verifying")
+                    help="alias for the `fix` command: auto-repair, then verify")
+
+    sp = sub.add_parser("fix",
+                        help="auto-repair safe defects (posters, comma-tags), then verify")
+    sp.add_argument("pack", help="pack directory")
+    sp.add_argument("--strict", action="store_true",
+                    help="treat warnings as blocking")
 
     sp = sub.add_parser("posters",
                         help="generate companion poster PNGs for animated icons")
@@ -123,24 +129,27 @@ def main(argv=None):
         print_report(args.pack, errors, warnings)
         sys.exit(1 if errors else 0)
 
-    elif args.cmd == "verify":
+    elif args.cmd in ("verify", "fix"):
         from pathlib import Path as _P
         from . import spec as _spec
         from .verify import verify, verify_container, print_report, has_blocking
         target = args.pack
-        if _P(target).is_file() and target.endswith(_spec.PACK_EXT):
-            findings = verify_container(target)
-        else:
-            if args.fix:
-                from .autofix import autofix
-                fixes = autofix(target)
-                if fixes:
-                    print(f"→ auto-fixed {len(fixes)} issue(s):")
-                    for code, detail in fixes:
-                        print(f"    [{code}] {detail}")
-                else:
-                    print("→ nothing to auto-fix")
-            findings = verify(target)
+        is_container = _P(target).is_file() and target.endswith(_spec.PACK_EXT)
+        # `fix` (or the `verify --fix` alias) auto-repairs a pack directory first.
+        do_fix = args.cmd == "fix" or getattr(args, "fix", False)
+        if do_fix and is_container:
+            sys.exit("fix: operates on a pack directory, not a "
+                     ".streamDeckIconPack container. Fix the source, then package.")
+        if do_fix:
+            from .autofix import autofix
+            fixes = autofix(target)
+            if fixes:
+                print(f"→ auto-fixed {len(fixes)} issue(s):")
+                for code, detail in fixes:
+                    print(f"    [{code}] {detail}")
+            else:
+                print("→ nothing to auto-fix")
+        findings = verify_container(target) if is_container else verify(target)
         print_report(target, findings, strict=args.strict)
         sys.exit(1 if has_blocking(findings, strict=args.strict) else 0)
 
