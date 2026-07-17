@@ -21,30 +21,14 @@ those are done.
 """
 import json
 import re
-import tempfile
-import zipfile
 from pathlib import Path
 
 from PIL import Image
 
 from . import spec
-from .util import ok, warn, err, dim
-
-ERROR, WARN, INFO = "ERROR", "WARN", "INFO"
-
-
-class Finding:
-    __slots__ = ("level", "code", "message")
-
-    def __init__(self, level, code, message):
-        self.level, self.code, self.message = level, code, message
-
-    def __repr__(self):
-        return f"Finding({self.level}, {self.code!r}, {self.message!r})"
-
-    def __eq__(self, other):
-        return (isinstance(other, Finding) and self.level == other.level
-                and self.code == other.code and self.message == other.message)
+from sdcommon.findings import (Finding, ERROR, WARN, INFO,
+                               counts, has_blocking, print_report as _print_report)
+from sdcommon.container import verify_container as _verify_container
 
 
 # ── helpers ──────────────────────────────────────────────────────────────────
@@ -303,55 +287,19 @@ def verify(plugin_dir, foreign=None) -> list:
     return findings
 
 
-def _plugin_dir(root: Path) -> Path:
-    subs = [d for d in root.rglob("*") if d.is_dir()
-            and d.name.endswith(spec.SDPLUGIN_SUFFIX)]
-    return subs[0] if subs else root
-
-
 def verify_container(archive, foreign=None) -> list:
-    """Unzip a shipped `.streamDeckPlugin` and verify the real bytes inside."""
-    archive = Path(archive)
-    if not archive.exists():
-        return [Finding(ERROR, "no-container", f"{archive} does not exist")]
-    try:
-        with tempfile.TemporaryDirectory() as tmp:
-            with zipfile.ZipFile(archive) as z:
-                z.extractall(tmp)
-            return verify(_plugin_dir(Path(tmp)), foreign=foreign)
-    except zipfile.BadZipFile:
-        return [Finding(ERROR, "bad-container",
-                        f"{archive} is not a valid zip / .streamDeckPlugin")]
+    """Unzip a shipped `.streamDeckPlugin` and verify the real bytes inside.
 
-
-# ── reporting ────────────────────────────────────────────────────────────────
-
-def counts(findings):
-    c = {ERROR: 0, WARN: 0, INFO: 0}
-    for f in findings:
-        c[f.level] = c.get(f.level, 0) + 1
-    return c
-
-
-def has_blocking(findings, strict=False):
-    c = counts(findings)
-    return c[ERROR] > 0 or (strict and c[WARN] > 0)
+    Delegates the zip mechanics to the shared `sdcommon.container` helper.
+    """
+    return _verify_container(archive, spec.SDPLUGIN_SUFFIX, verify, foreign=foreign)
 
 
 def print_report(target, findings, strict=False):
-    style = {ERROR: err, WARN: warn, INFO: dim}
-    glyph = {ERROR: "✖", WARN: "⚠", INFO: "·"}
-    for lvl in (ERROR, WARN, INFO):
-        for f in [x for x in findings if x.level == lvl]:
-            print(style[lvl](f"  {glyph[lvl]} [{f.code}] {f.message}"))
-    c = counts(findings)
-    if c[ERROR] == 0 and c[WARN] == 0:
-        print(ok(f"  ✓ {target}: publication-ready — no automatable issues"))
-    elif c[ERROR] == 0:
-        tail = " (blocking under --strict)" if strict and c[WARN] else ""
-        print((err if (strict and c[WARN]) else ok)(
-            f"  {'✖' if strict and c[WARN] else '✓'} {target}: "
-            f"{c[WARN]} warning(s){tail}"))
-    else:
-        print(err(f"  ✖ {target}: {c[ERROR]} error(s), {c[WARN]} warning(s) — "
-                  f"NOT ready to publish"))
+    """Report with the plugin-specific "no automatable issues" clean line."""
+    _print_report(target, findings, strict=strict,
+                  clean_msg="publication-ready — no automatable issues")
+
+
+# `counts`, `has_blocking` are imported from sdcommon.findings and re-exported
+# here so `from .verify import counts, has_blocking` keeps working.

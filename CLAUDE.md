@@ -1,24 +1,40 @@
-# CLAUDE.md — stream-deck-icons
+# CLAUDE.md — streamdeck-toolkit
 
 Project-specific rules. The global `~/.claude/CLAUDE.md` still applies
 (git workflow, storage tiers, autonomy, French chat, etc.).
 
 ## What this is
 
-A **toolkit** (`sdicons`) that turns a folder of source icons into a
-validated, Marketplace-ready Elgato Stream Deck **icon pack**. The goal is
-the tooling, not any specific palette — palettes are just inputs. Sibling
-of `stream-deck` (config/backups) and `stream-deck-profiles` in the `music`
-group.
+**One repo, two tools, one shared core** — everything needed to build, verify
+and publish Elgato Stream Deck content to the Marketplace without a review
+rejection. Merged 2026-07-17 from the former `stream-deck-icons` +
+`streamdeck-plugin-toolkit` (they shared the `Finding` model, reporting,
+colours and the container-verify helper — now factored into `sdcommon`).
 
-**This repo is the TOOL only.** Actual icon packs live in their own repos and
-are *built with* this toolkit — e.g.
-[streamdeck-stage-keys](https://github.com/Beennnn/streamdeck-stage-keys)
-(`~/dev/music/streamdeck-stage-keys`, the 83-icon GM/XP keyboardist pack).
-Decided 2026-07-12: keep the generic MIT tool separate from CC-BY content
-packs (own versioning, own Marketplace home, tool stays lean). New packs =
-new sibling repos, not folders here. This repo keeps only its tiny
-`examples/demo-pack` to prove the pipeline.
+- **`sdicons/`** — icon-pack toolkit: render SVG→144×144, `icons.json`,
+  `verify`/`fix`, package `.streamDeckIconPack`.
+- **`sdplugin/`** — plugin verifier: `verify`/`fix` for white in-app icons,
+  cross-plugin references, the manifest gate, and shipped `.streamDeckPlugin`
+  containers.
+- **`sdcommon/`** — shared core: `findings.py` (`Finding`, `counts`,
+  `has_blocking`, `print_report`), `util.py` (colours), `container.py` (unzip +
+  verify). **Any new shared behaviour goes here, never duplicated per tool.**
+
+**This repo is the TOOLS only.** Actual icon *packs* and *plugins* live in their
+own repos and are *built/checked with* this toolkit — e.g.
+[streamdeck-stage-keys](https://github.com/Beennnn/streamdeck-stage-keys) (icon
+pack), [streamdeck-wifi-picker](https://github.com/Beennnn/streamdeck-wifi-picker)
+and [streamdeck-bluetooth-switcher](https://github.com/Beennnn/streamdeck-bluetooth-switcher)
+(plugins). Decided 2026-07-12: keep the generic MIT tools separate from CC-BY
+content packs (own versioning, own Marketplace home, tools stay lean). New
+packs/plugins = new sibling repos, not folders here. This repo keeps only its
+tiny `examples/demo-pack` to prove the icon pipeline.
+
+## Tests
+
+Two suites under `tests/icons/` and `tests/plugins/` (each dir is a package with
+its own `conftest.py`; kept in subdirs because both had a `test_verify.py`). Run
+all: `python3 -m pytest tests/` (112 cases). `sdcommon` is exercised through both.
 
 ## Stack & layout
 

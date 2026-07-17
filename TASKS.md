@@ -1,7 +1,7 @@
-# TASKS — stream-deck-icons (the toolkit)
+# TASKS — streamdeck-toolkit
 
-Packs live in their own repos (e.g. streamdeck-stage-keys). This repo is the
-`sdicons` tool only.
+Packs and plugins live in their own repos. This repo is the `sdicons` +
+`sdplugin` tools (+ shared `sdcommon`) only.
 
 - ☐ Optional: `pyproject.toml` + `pip install -e .` so `sdicons` is on PATH (packs' bin/build.sh already look for it there)
 - ☐ Optional: SVG viewBox squareness check in `validate` (warn on non-square sources → letterboxed at 144×144)

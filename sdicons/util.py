@@ -1,20 +1,13 @@
-"""Shared helpers: slugging, colored console output, tool discovery."""
+"""sdicons-specific helpers: slugging + external-tool discovery.
+
+Coloured output lives in the shared core (`sdcommon.util`) and is re-exported
+here so existing `from .util import ok, warn, err, dim` imports keep working.
+"""
 import re
 import shutil
 import sys
 
-# ANSI colours — only when stdout is a TTY so piped output stays clean.
-_TTY = sys.stdout.isatty()
-
-
-def _c(code, s):
-    return f"\033[{code}m{s}\033[0m" if _TTY else s
-
-
-def ok(s):    return _c("32", s)   # green
-def warn(s):  return _c("33", s)   # yellow
-def err(s):   return _c("31", s)   # red
-def dim(s):   return _c("2", s)    # dim
+from sdcommon.util import ok, warn, err, dim  # re-exported for sdicons modules
 
 
 def slug(name):

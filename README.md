@@ -1,15 +1,38 @@
-# stream-deck-icons
+# streamdeck-toolkit
 
-**A toolkit to generate and publish Elgato Stream Deck icon packs.** Point it
-at a folder of SVGs and it renders them to spec, writes the pack metadata,
-lints everything against Elgato's requirements, builds a contact sheet, and
-packages a `.streamDeckIconPack` ready for [Icon Pack Man](https://iconpackman.elgato.com/)
-and the Marketplace.
+**Build, verify and publish Elgato Stream Deck content — icon packs *and*
+plugins — without hitting a Marketplace review rejection.** Two command-line
+tools over one shared core, each with a `verify` gate and a `fix` auto-repair
+mode distilled from real Maker Console rejections.
 
-The point isn't any one palette — it's the **tools** that turn any palette
-into a publishable pack, every time, without hitting a review rejection.
+| Tool | For | Highlights |
+| --- | --- | --- |
+| **`sdicons`** | **icon packs** | render SVG→144×144, write `icons.json`, `verify` (companion posters, sizes, tags…), `fix`, package a `.streamDeckIconPack` |
+| **`sdplugin`** | **plugins** | `verify` (white in-app icons, no cross-plugin refs, manifest gate), `fix` (whiten icons, generate `@2x`), check a shipped `.streamDeckPlugin` |
+| **`sdcommon`** | *shared core* | the `Finding` model + report, coloured output, and the container (zip) verify helper both tools use |
 
-## Pipeline
+```sh
+bin/sdicons  verify MyPack            # icon-pack pre-publication gate
+bin/sdicons  fix    MyPack            # auto-repair, then verify
+bin/sdplugin verify my.sdPlugin       # plugin pre-publication gate
+bin/sdplugin fix    my.sdPlugin       # auto-repair, then verify
+```
+
+**Plugin building** (toolchain, skeleton, ship loop, gotchas) →
+[docs/PLUGINS.md](docs/PLUGINS.md). **Marketplace review playbook** →
+[docs/MARKETPLACE-REVIEW.md](docs/MARKETPLACE-REVIEW.md). **Proposal to Elgato**
+(offer these checkers upstream) → [docs/ELGATO-PROPOSAL.md](docs/ELGATO-PROPOSAL.md).
+
+---
+
+## Icon packs (`sdicons`)
+
+Point it at a folder of SVGs and it renders them to spec, writes the pack
+metadata, lints everything against Elgato's requirements, builds a contact
+sheet, and packages a `.streamDeckIconPack` ready for
+[Icon Pack Man](https://iconpackman.elgato.com/) and the Marketplace.
+
+### Pipeline
 
 ```
 src/*.svg ──render──▶ MyPack/icons/*.png (144×144)      static SVG/PNG/JPEG

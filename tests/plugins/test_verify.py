@@ -133,10 +133,9 @@ def test_missing_codepath_is_error(plugin_factory):
     assert "missing-codepath" in codes(verify(plug), ERROR)
 
 
-def test_bad_uuid_is_error(plugin_factory, tmp_path):
-    from tests.conftest import make_plugin
-    plug = make_plugin(tmp_path / "bad", uuid="NotReverseDomain")
+def test_bad_uuid_is_error(plugin_factory):
     # folder name won't match either, but the UUID_RE is the ERROR
+    plug = plugin_factory(uuid="NotReverseDomain")
     assert "bad-uuid" in codes(verify(plug), ERROR)
 
 

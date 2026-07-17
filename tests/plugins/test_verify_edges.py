@@ -16,9 +16,8 @@ def test_fully_transparent_in_app_icon_is_flagged(plugin_factory):
     assert "non-white-icon" in codes(verify(plug))
 
 
-def test_uuid_folder_mismatch_warns(tmp_path):
-    from tests.conftest import make_plugin
-    plug = make_plugin(tmp_path / "root", uuid="com.tester.demo")
+def test_uuid_folder_mismatch_warns(plugin_factory):
+    plug = plugin_factory(uuid="com.tester.demo")
     # rename the folder so it no longer matches <UUID>.sdPlugin
     renamed = plug.parent / "wrongname.sdPlugin"
     plug.rename(renamed)
