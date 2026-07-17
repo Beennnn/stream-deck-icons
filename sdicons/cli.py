@@ -132,11 +132,14 @@ def main(argv=None):
             findings = verify_container(target)
         else:
             if args.fix:
-                from .posters import ensure_posters
-                from . import spec as _spec
-                made = ensure_posters(_P(target) / _spec.DIR_ICONS, verbose=True)
-                if made:
-                    print(f"→ generated {len(made)} poster(s)")
+                from .autofix import autofix
+                fixes = autofix(target)
+                if fixes:
+                    print(f"→ auto-fixed {len(fixes)} issue(s):")
+                    for code, detail in fixes:
+                        print(f"    [{code}] {detail}")
+                else:
+                    print("→ nothing to auto-fix")
             findings = verify(target)
         print_report(target, findings, strict=args.strict)
         sys.exit(1 if has_blocking(findings, strict=args.strict) else 0)

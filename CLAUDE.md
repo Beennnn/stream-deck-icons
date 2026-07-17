@@ -182,11 +182,20 @@ this?" — a strict superset that also catches the real rejections:
 
 ```
 bin/sdicons verify MyPack                 # exit 1 on any ERROR
-bin/sdicons verify MyPack --fix           # generate missing posters, then verify
+bin/sdicons verify MyPack --fix           # auto-repair, then verify
 bin/sdicons verify MyPack --strict        # warnings become blocking
 bin/sdicons verify dist/foo.streamDeckIconPack   # verify the SHIPPED bytes
 bin/sdicons posters MyPack                # just (re)generate companion posters
 ```
+
+**`--fix`** (`autofix.py`) applies the safe, unambiguous repairs: (re)generates
+every missing / wrong-size / wrong-format companion poster from the animation's
+first frame, and splits any icons.json tag containing `", "` (which iconpackman
+rejects). Idempotent — a second run finds nothing. Everything else `verify`
+flags (no Description, off-size source icons, low-fps animations…) needs a human
+and is left to the report. We plan to offer these checkers to Elgato as an
+official local pre-publication tool — see the plugin toolkit's
+[docs/ELGATO-PROPOSAL.md](https://github.com/Beennnn/streamdeck-plugin-toolkit/blob/main/docs/ELGATO-PROPOSAL.md).
 
 Checks (each finding is `[code]`-tagged, ERROR/WARN/INFO): `missing-poster`,
 `poster-size`/`poster-format`, `bad-tag` (iconpackman rejects `", "` in a tag),
@@ -195,7 +204,7 @@ Checks (each finding is `[code]`-tagged, ERROR/WARN/INFO): `missing-poster`,
 all structural errors folded in. `verify_container` unzips a `.streamDeckIconPack`
 and checks the real bytes — run it on `dist/` right before uploading to catch a
 stale container built before a fix. Tests: `tests/test_verify*.py`,
-`tests/test_posters.py` (49 tests, ~96% coverage — `python3 -m pytest tests/`).
+`tests/test_posters.py` (54 tests, ~93% coverage — `python3 -m pytest tests/`).
 
 ## Conventions
 
