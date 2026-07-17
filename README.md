@@ -97,25 +97,29 @@ per-bundle `outDir` to `@rollup/plugin-typescript` or it errors on the second on
 
 ---
 
-## `sdplugin-verify` — automate the pre-submission checklist
+## `sdplugin` — automate the pre-submission checklist
 
-The checks a script *can* run are run for you. `sdplugin-verify` is the plugin
+The checks a script *can* run are run for you. `sdplugin` is the plugin
 sibling of [`sdicons verify`](https://github.com/Beennnn/stream-deck-icons): it
 encodes the automatable half of [docs/MARKETPLACE-REVIEW.md](docs/MARKETPLACE-REVIEW.md)
 so a plugin never gets rejected for something detectable ahead of time.
 
+Two modes — **`verify`** (check only, never writes) and **`fix`** (auto-repair,
+then re-verify):
+
 ```sh
-bin/sdplugin-verify path/to/<uuid>.sdPlugin          # verify a plugin directory
-bin/sdplugin-verify dist/foo.streamDeckPlugin        # verify the SHIPPED bytes
-bin/sdplugin-verify <plugin> --fix                   # auto-repair, then verify
-bin/sdplugin-verify <plugin> --strict                # warnings become blocking
-bin/sdplugin-verify <plugin> --foreign bluetooth,vpn # force-forbid feature terms
+bin/sdplugin verify path/to/<uuid>.sdPlugin          # check a plugin directory
+bin/sdplugin verify dist/foo.streamDeckPlugin        # check the SHIPPED bytes
+bin/sdplugin fix    <uuid>.sdPlugin                  # auto-repair, then verify
+bin/sdplugin verify <plugin> --strict                # warnings become blocking
+bin/sdplugin verify <plugin> --foreign bluetooth,vpn # force-forbid feature terms
 ```
 
-**`--fix`** auto-repairs the safe, unambiguous defects from our own rejections:
+**`fix`** auto-repairs the safe, unambiguous defects from our own rejections:
 it **whitens** coloured in-app icons (RGB→`#FFFFFF`, alpha kept — never touching
 key `States[].Image` art) and **generates missing `@2x`** variants. Foreign
 references are reported, never auto-edited (they need human intent). Idempotent.
+(`bin/sdplugin-verify …` stays as a compat alias for `bin/sdplugin verify …`.)
 
 > We plan to offer these checkers to Elgato as an official local pre-publication
 > tool — see [docs/ELGATO-PROPOSAL.md](docs/ELGATO-PROPOSAL.md).
@@ -133,7 +137,7 @@ It catches the two real rejection classes plus the manifest gate:
   no `Nodejs.Debug`, valid reverse-domain UUID matching the folder, all referenced
   images (`@1x`+`@2x`) and Property Inspector files present.
 
-Requires Python 3 + Pillow. Tests: `python3 -m pytest tests/` (41 cases, 98%
+Requires Python 3 + Pillow. Tests: `python3 -m pytest tests/` (52 cases, ~97%
 coverage). The **human-only** steps — demo video, gallery re-shoot, the final
 Submit — stay in the doc; the tool never claims those are done.
 
@@ -143,7 +147,7 @@ Submit — stay in the doc; the tool never claims those are done.
 > machine checks — white in-app icons, no stale cross-plugin references, a strong
 > gallery, and a demo video are what actually get plugins rejected. Full rejection
 > log + fixes + a pre-submission checklist: **[docs/MARKETPLACE-REVIEW.md](docs/MARKETPLACE-REVIEW.md)**.
-> Run **`bin/sdplugin-verify`** (above) to check the automatable items in one shot.
+> Run **`bin/sdplugin verify`** (above) to check the automatable items in one shot.
 
 Maker Console silently disables **Continue** if these aren't met — check them first:
 

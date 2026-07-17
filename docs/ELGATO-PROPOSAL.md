@@ -44,7 +44,7 @@ Two open-source checkers (MIT, Python 3 + Pillow), each with a `verify` gate and
 - **`--fix`:** generates every missing/wrong companion poster from the animation's
   first frame; splits `", "` tags. Idempotent.
 
-### Plugins — [`sdplugin-verify`](https://github.com/Beennnn/streamdeck-plugin-toolkit)
+### Plugins — [`sdplugin verify` / `fix`](https://github.com/Beennnn/streamdeck-plugin-toolkit)
 - **Checks:** in-app icons (plugin `Icon`, `CategoryIcon`, each action `Icon`,
   @1x+@2x) are white `#FFFFFF` monochrome on transparent — with key `States[].Image`
   and the store icon correctly exempt; no user-visible cross-plugin/foreign feature

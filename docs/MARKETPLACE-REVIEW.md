@@ -168,10 +168,11 @@ flow mirrors it):
 
 ## Pre-submission checklist (plugins)
 
-> **Automate the machine-checkable rows first:** `bin/sdplugin-verify
+> **Automate the machine-checkable rows first:** `bin/sdplugin verify
 > <uuid>.sdPlugin` (or `dist/*.streamDeckPlugin`) checks white icons (§1),
-> foreign references (§2), and the manifest gate (§4) in one shot. The ⌨️-marked
-> rows below are what it covers; the rest are human-only.
+> foreign references (§2), and the manifest gate (§4) in one shot; `bin/sdplugin
+> fix <uuid>.sdPlugin` auto-repairs the safe ones (white icons, @2x). The
+> ⌨️-marked rows below are what it covers; the rest are human-only.
 
 Run top to bottom before every submit / resubmit:
 
