@@ -186,6 +186,23 @@ small binary in the plugin instead of asking users to `brew install`:
 
 ## Gotchas I've actually hit
 
+- **Multiple actions that share state → one refresh loop, not one per action.** If a
+  plugin has several `SingletonAction`s that reflect the same live state (e.g. a
+  Connect tile + an on/off tile), do NOT give each its own `setInterval` — they drift
+  out of step and each re-queries the OS. Put a **single shared hub** in its own
+  module: one loop takes one snapshot per tick and drives every action's render in
+  the SAME tick; each action `hub.subscribe(fn)` and reads the snapshot. Keep renders
+  **idempotent** (emit `setState`/`setTitle` only when the value changed) so a steady
+  tick sends nothing and writes no SDK log, and throttle the slow queries (a rarely-
+  changing radio state, a heavy `system_profiler`) inside the hub. Worked example:
+  the Bluetooth/Wi-Fi switchers' `src/hub.ts` (see their `docs/REFRESH-HUB.md`).
+
+- **Colour-code a multi-purpose tile with extra `States` + `DisableAutomaticStates`.**
+  A radio on/off tile reads better as off / idle / connecting / connected (grey /
+  blue / amber / green) than a bare on/off. Add the extra entries to the manifest
+  `States` array and set **`DisableAutomaticStates: true`** — otherwise a press
+  cycles through every state instead of toggling; you drive the index yourself.
+
 - **`@action({UUID})` must sit directly above the class.** Slipping a `const`/comment
   between the decorator and `export class …` detaches it → *"The action's manifestId
   cannot be undefined"* and the plugin crash-loops. (The `tsc` "Decorators are not
